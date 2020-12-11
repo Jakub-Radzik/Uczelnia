@@ -1,11 +1,10 @@
 import InterakcjaKonsola.*;
 import Klasy.*;
 
-import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Main {
+public class Uczelnia {
     //STRATEGY DESIGN PATTER FOR ADDITION Students, Courses, Workers
     ZapisObiektu zapisObiektu;
 
@@ -40,7 +39,7 @@ public class Main {
         return kursy;
     }
 
-    public Main(){
+    public Uczelnia(){
         Szymon_Romanek = new Pracownik_Badawczo_Dydaktyczny("Szymon", "Romanek","000000000000", 30,"M","Wykladowca", 5,3000,5);
         Piotr_Puchala = new Pracownik_Badawczo_Dydaktyczny("Piotr", "Puchala","11111111111", 35,"M","Profesor Nadzwyczajny", 15,15000,22);
         Rafal_Kruszyna = new Pracownik_Badawczo_Dydaktyczny("Rafal", "Kruszyna","22222222222", 25,"M","Adiunkt", 5,5500,10);
@@ -154,16 +153,18 @@ public class Main {
     }
 
     public void menu(){
-        System.out.println("WITAJ W MOJEJ UCZELNI");
-        System.out.println("Co chcesz zrobić?");
+        System.out.println("____________________________________");
+        System.out.println("\uD83C\uDF93 WITAJ W MOJEJ UCZELNI \uD83C\uDF93");
+        System.out.println();
         System.out.println("[1] - dodać kurs");
         System.out.println("[2] - dodać studenta");
         System.out.println("[3] - dodać pracownika administracji");
         System.out.println("[4] - dodać pracownika dydaktycznego");
+        System.out.println("____________________________________");
     }
 
     public static void main(String[] args) throws InterruptedException {
-        Main uczelnia = new Main();
+        Uczelnia uczelnia = new Uczelnia();
 //        uczelnia.realizacjap34();
 
         Scanner scanner = new Scanner(System.in);
@@ -188,11 +189,13 @@ public class Main {
 
                 //prezentacja wyboru pracownika dydaktycznego
                 AtomicInteger c = new AtomicInteger();
+
+                System.out.println("[0] - Utwórz nowego prowadzącego");
                 uczelnia.osoby.stream()
                         .filter(osoba -> osoba instanceof Pracownik_Badawczo_Dydaktyczny)
                         .forEach(osoba -> System.out.println("["+ (c.incrementAndGet()) + "]"+ " - "+osoba.getImie()+" "+osoba.getNazwisko()));
 
-                wybor = 0;
+                wybor = -1;
                 do{
                     System.out.println("Wybierz prowadzacego:");
                     try{
@@ -201,19 +204,29 @@ public class Main {
                         scanner.next();
                     }
 
-                }while (wybor<1 || wybor>c.get());
+                }while (wybor<0 || wybor>c.get());
 
-                c.set(0);
-                for(Osoba osoba: uczelnia.osoby) {
-                    if(osoba instanceof Pracownik_Badawczo_Dydaktyczny){
-                        c.incrementAndGet();
-                        if (c.get() == wybor){
-                            uczelnia.kursy.get(uczelnia.kursy.size()-1).setProwadzacy((Pracownik_Badawczo_Dydaktyczny) osoba);
+                if(wybor==0){ //Utworzono nowy kurs i tworzymy nowego prowadzącego dla tego kursu
+                    uczelnia.setZapisObiektu(new ZapisObiektuPracownikDydaktyczny());       //Przełączenie strategii na utworzenie nowego pracownika dydaktycznego
+                    uczelnia.osoby.add((Pracownik_Badawczo_Dydaktyczny) uczelnia.zapisObiektu.saveObject());    //Po utworzeniu pracownika zapisanie go na koncu tablicy osob
+                    Thread.sleep(2);
+                    System.out.println("NOWY PROWADZĄCY:============================================");
+                    System.out.println(uczelnia.osoby.get(uczelnia.osoby.size()-1));    //Nowy prowadzący jest na koncu
+                    System.out.println("NOWY KURS:==================================================");
+                    uczelnia.kursy.get(uczelnia.kursy.size()-1).setProwadzacy((Pracownik_Badawczo_Dydaktyczny) uczelnia.osoby.get(uczelnia.osoby.size()-1));
+                    //nowy utworzony kurs jest na koncu tablicy kursów - bierzemy go i przypisujemy mu ostatniego pracownika z zapisanych czyli nowego pracownika
+
+                }else { // przypisanie istniejącego prowadzącego
+                    c.set(0);
+                    for(Osoba osoba: uczelnia.osoby) {
+                        if(osoba instanceof Pracownik_Badawczo_Dydaktyczny){
+                            c.incrementAndGet();
+                            if (c.get() == wybor){
+                                uczelnia.kursy.get(uczelnia.kursy.size()-1).setProwadzacy((Pracownik_Badawczo_Dydaktyczny) osoba);
+                            }
                         }
                     }
-
                 }
-
                 System.out.println(uczelnia.kursy.get(uczelnia.kursy.size()-1).toString());
 
             }
@@ -256,7 +269,6 @@ public class Main {
                 Thread.sleep(2);
                 System.out.println(uczelnia.osoby.get(uczelnia.osoby.size()-1));
             }
-            default -> System.out.println("coś poszło nie tak, dowiedz się co");
         }
 
 //        uczelnia.kursy.forEach(System.out::println);
