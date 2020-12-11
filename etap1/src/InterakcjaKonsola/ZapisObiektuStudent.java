@@ -12,17 +12,7 @@ public class ZapisObiektuStudent implements ZapisObiektu{
 
         Scanner scanner = new Scanner(System.in);
         Student myStudent = new Student();
-
-        System.out.println("Wprowadź imię:");
-        myStudent.setImie(scanner.nextLine());
-        System.out.println("Wprowadź nazwisko:");
-        myStudent.setImie(scanner.nextLine());
-        System.out.println("Wprowadź PESEL:");
-        myStudent.setPesel(scanner.nextLine());
-        System.out.println("Wprowadź plec [M/K]:");
-        myStudent.setPlec(scanner.nextLine());
-        System.out.println("Wprowadź wiek:");
-        myStudent.setWiek(scanner.nextInt());
+        AbstractCreator.personCreator(myStudent);
         System.out.println("Wprowadź rok studiów:");
         myStudent.setRokStudiow(scanner.nextInt());
 

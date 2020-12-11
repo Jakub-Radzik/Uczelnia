@@ -12,6 +12,10 @@ public abstract class Pracownik_Uczelni extends Osoba{
         this.pensja = pensja;
     }
 
+    public Pracownik_Uczelni() {
+        super();
+    }
+
     public String getStanowisko() {
         return stanowisko;
     }

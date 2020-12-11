@@ -3,6 +3,10 @@ package Klasy;
 public class Pracownik_Administracyjny extends Pracownik_Uczelni{
     private int liczba_nadgodzin;
 
+    public Pracownik_Administracyjny() {
+        super();
+    }
+
     public Pracownik_Administracyjny(String imie, String nazwisko, String pesel, int wiek, String plec, String stanowisko, int stazPracy, double pensja, int liczba_nadgodzin) {
         super(imie, nazwisko, pesel, wiek, plec, stanowisko, stazPracy, pensja);
         this.liczba_nadgodzin = liczba_nadgodzin;

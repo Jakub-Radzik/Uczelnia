@@ -1,6 +1,4 @@
-import InterakcjaKonsola.ZapisObiektu;
-import InterakcjaKonsola.ZapisObiektuKurs;
-import InterakcjaKonsola.ZapisObiektuStudent;
+import InterakcjaKonsola.*;
 import Klasy.*;
 
 import java.io.IOException;
@@ -165,6 +163,8 @@ public class Main {
         System.out.println("Co chcesz zrobić?");
         System.out.println("[1] - dodać kurs");
         System.out.println("[2] - dodać studenta");
+        System.out.println("[3] - dodać pracownika administracji");
+        System.out.println("[4] - dodać pracownika dydaktycznego");
     }
 
 
@@ -206,12 +206,6 @@ public class Main {
 
                 System.out.println(uczelnia.kursy.get(uczelnia.kursy.size()-1).toString());
 
-
-
-
-
-
-
             }
             case 2 -> {
                 uczelnia.setZapisObiektu(new ZapisObiektuStudent());
@@ -239,6 +233,18 @@ public class Main {
                 System.out.println(uczelnia.osoby.get(uczelnia.osoby.size()-1));
 
 
+            }
+            case 3 -> {
+                uczelnia.setZapisObiektu(new ZapisObiektuPracownikAdministracji());
+                uczelnia.osoby.add((Pracownik_Administracyjny) uczelnia.zapisObiektu.saveObject());
+                Thread.sleep(2);
+                System.out.println(uczelnia.osoby.get(uczelnia.osoby.size()-1));
+            }
+            case 4 -> {
+                uczelnia.setZapisObiektu(new ZapisObiektuPracownikDydaktyczny());
+                uczelnia.osoby.add((Pracownik_Badawczo_Dydaktyczny) uczelnia.zapisObiektu.saveObject());
+                Thread.sleep(2);
+                System.out.println(uczelnia.osoby.get(uczelnia.osoby.size()-1));
             }
             default -> System.out.println("coś poszło nie tak, dowiedz się co");
         }
