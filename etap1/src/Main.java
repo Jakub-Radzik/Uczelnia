@@ -3,10 +3,14 @@ import InterakcjaKonsola.ZapisObiektuKurs;
 import InterakcjaKonsola.ZapisObiektuStudent;
 import Klasy.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class Main {
     //STRATEGY DESIGN PATTER FOR ADDITION Students, Courses, Workers
@@ -164,7 +168,7 @@ public class Main {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Main uczelnia = new Main();
 //        uczelnia.realizacjap34();
 
@@ -211,7 +215,30 @@ public class Main {
             }
             case 2 -> {
                 uczelnia.setZapisObiektu(new ZapisObiektuStudent());
-                uczelnia.zapisObiektu.saveObject();
+                Thread.sleep(2);
+
+                //Ustawiam podstawowe kursy dla studenta
+                Student myStudent = (Student)uczelnia.zapisObiektu.saveObject();
+                myStudent.setListaKursow(Arrays.asList(uczelnia.algebra, uczelnia.analiza1));
+
+                ArrayList<String> indeksy = new ArrayList<>();
+                for (Osoba osoba: uczelnia.osoby) {
+                    if(osoba instanceof Student){
+                        indeksy.add(((Student) osoba).getNumer_indeksu());
+                    }
+                }
+
+                while (true){
+                    String newIndeks = String.valueOf(new Random().nextInt(999999999));
+                    if(!indeksy.contains(newIndeks)){
+                        myStudent.setNumer_indeksu(newIndeks);
+                        break;
+                    }
+                }
+                uczelnia.osoby.add(myStudent);
+                System.out.println(uczelnia.osoby.get(uczelnia.osoby.size()-1));
+
+
             }
             default -> System.out.println("coś poszło nie tak, dowiedz się co");
         }
