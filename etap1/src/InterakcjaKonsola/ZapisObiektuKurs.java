@@ -1,7 +1,6 @@
 package InterakcjaKonsola;
 
 import Klasy.Kurs;
-import Klasy.Pracownik_Badawczo_Dydaktyczny;
 
 import java.util.Scanner;
 

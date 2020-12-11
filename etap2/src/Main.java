@@ -1,15 +1,8 @@
-import InterakcjaKonsola.*;
+import InterakcjaKonsola.ZapisObiektu;
 import Klasy.*;
 import Serializacja.SerializacjaOsob;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Random;
-import java.util.Scanner;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 public class Main {
     //STRATEGY DESIGN PATTER FOR ADDITION Students, Courses, Workers

@@ -2,13 +2,8 @@ import InterakcjaKonsola.*;
 import Klasy.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 public class Main {
     //STRATEGY DESIGN PATTER FOR ADDITION Students, Courses, Workers
@@ -167,15 +162,25 @@ public class Main {
         System.out.println("[4] - dodać pracownika dydaktycznego");
     }
 
-
     public static void main(String[] args) throws InterruptedException {
         Main uczelnia = new Main();
 //        uczelnia.realizacjap34();
 
         Scanner scanner = new Scanner(System.in);
-
         uczelnia.menu();
-        switch (scanner.nextInt()) {
+        int wybor = 0;
+        do{
+            System.out.println("Wybierz operacje:");
+            try{
+                wybor = scanner.nextInt();
+            }catch(InputMismatchException ex){
+                scanner.next();
+            }catch(Exception ex){
+                ex.printStackTrace();
+            }
+        }while (wybor<1 || wybor>4);
+
+        switch (wybor) {
             case 1 -> {
                 uczelnia.setZapisObiektu(new ZapisObiektuKurs());
                 uczelnia.kursy.add((Kurs) uczelnia.zapisObiektu.saveObject());
@@ -187,11 +192,16 @@ public class Main {
                         .filter(osoba -> osoba instanceof Pracownik_Badawczo_Dydaktyczny)
                         .forEach(osoba -> System.out.println("["+ (c.incrementAndGet()) + "]"+ " - "+osoba.getImie()+" "+osoba.getNazwisko()));
 
-                int wybor = 0;
+                wybor = 0;
                 do{
                     System.out.println("Wybierz prowadzacego:");
-                    wybor = scanner.nextInt();
-                }while (wybor<1 && wybor>c.get());
+                    try{
+                        wybor = scanner.nextInt();
+                    }catch (InputMismatchException ex){
+                        scanner.next();
+                    }
+
+                }while (wybor<1 || wybor>c.get());
 
                 c.set(0);
                 for(Osoba osoba: uczelnia.osoby) {
