@@ -14,7 +14,7 @@ public abstract class AbstractCreator {
         do{
             System.out.println("Wprowadź "+description+":");
             txt = scanner.nextLine();
-        }while(!(txt).chars().allMatch(Character::isLetter));
+        }while((txt).chars().allMatch(Character::isDigit)); //Sprawdzam czy istnieją cyfry bo może posiadać spacje które nie są literami
         return txt;
     }
     protected static String checkStringHasOnlyNumbers(String description){
@@ -42,18 +42,29 @@ public abstract class AbstractCreator {
         } while (number<0 && !Integer.valueOf(number).toString().chars().allMatch(Character::isDigit));
         return number;
     }
+    protected static String isGenderValid(){
+        Scanner scanner = new Scanner(System.in);
+        String gender;
+        while (true){
+            System.out.println("Wprowadź plec [M/K]:");
+            gender = scanner.nextLine();
+            if((gender).chars().allMatch(Character::isLetter)){
+                if (gender.toLowerCase().startsWith("m")){
+                    return "M";
+                }else if(gender.toLowerCase().startsWith("k")){
+                    return "K";
+                }
+            }
+        }
+    }
 
 
     protected static Osoba personCreator(Osoba person) {
         Scanner scanner = new Scanner(System.in);
-
         person.setImie(checkStringHasOnlyLetters("imię"));
         person.setNazwisko(checkStringHasOnlyLetters("nazwisko"));
         person.setPesel(checkStringHasOnlyNumbers("PESEL"));
-
-        System.out.println("Wprowadź plec [M/K]:");
-        person.setPlec(scanner.nextLine());
-
+        person.setPlec(isGenderValid());
         person.setWiek(isIntegerAndCorrect("wiek"));
         return person;
     }

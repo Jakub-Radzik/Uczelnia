@@ -165,7 +165,8 @@ public class Uczelnia {
         System.out.println("[4] - dodać pracownika dydaktycznego");
         System.out.println("____________________________________");
     }
-    public static void startInteraction(Uczelnia uczelnia){
+
+    public static void startInteraction(Uczelnia uczelnia) {
 
         Scanner scanner = new Scanner(System.in);
         uczelnia.menu();
@@ -188,8 +189,6 @@ public class Uczelnia {
                 ex.printStackTrace();
             }
         } while (wybor < 1 || wybor > 4);
-
-
 
 
         switch (wybor) {
