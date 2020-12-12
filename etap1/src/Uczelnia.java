@@ -61,9 +61,9 @@ public class Uczelnia {
         fizyka = new ArrayList<>(Arrays.asList(fizyka1, termodynamika, wychowanieFizyczne, analiza1));
         informatyka = new ArrayList<>(Arrays.asList(fizyka1, logika, wychowanieFizyczne, analiza1, ProgramowanieStrukturalneIObiektrowe));
 
-        Mateusz_Pietrych = new Student("Mateusz", "Pietrych", "66666666666", 19, "M", "123456", matematyka, false, true, true, 1);
-        Wiktor_Sadowy = new Student("Wiktor", "Sadowy", "77777777777", 20, "M", "123654", fizyka, false, true, true, 2);
-        Jakub_Oleszczuk = new Student("Jakub", "Oleszczuk", "88888888888", 21, "M", "123777", informatyka, false, false, true, 3);
+        Mateusz_Pietrych = new Student("Mateusz", "Pietrych", "66666666666", 19, "M", "123456", matematyka, false, true, true, 1, "Matematyka Stosowana");
+        Wiktor_Sadowy = new Student("Wiktor", "Sadowy", "77777777777", 20, "M", "123654", fizyka, false, true, true, 2, "Fizyka Jądrowa");
+        Jakub_Oleszczuk = new Student("Jakub", "Oleszczuk", "88888888888", 21, "M", "123777", informatyka, false, false, true, 3, "Informatyka Stosowana");
 
         kursy = new ArrayList<>(Arrays.asList(analiza1, logika, algebra, fizyka1, termodynamika, wychowanieFizyczne, ProgramowanieStrukturalneIObiektrowe));
         osoby = new ArrayList<>(Arrays.asList(Szymon_Romanek, Rafal_Kruszyna, Piotr_Puchala, Jakub_Roszkowski, Natalia_Martynenko, Kamil_Herbetko, Malina_Lobocka, Mateusz_Pietrych, Wiktor_Sadowy, Jakub_Oleszczuk));
@@ -116,6 +116,9 @@ public class Uczelnia {
 
         System.out.println("\nWyszukiwanie studentów po roku studiów (1) ============================================================================\n");
         NarzedziaWyszukiwania.znajdzStudentowPoRokuStudiow(osoby, 1).forEach(System.out::println);
+
+        System.out.println("\nWyszukiwanie studentów po kierunku (Informatyka Stosowana) ============================================================================\n");
+        NarzedziaWyszukiwania.znajdzStudentowPoKierunku(osoby, "Informatyka Stosowana").forEach(System.out::println);
 
         System.out.println("\nWyszukiwanie kursu po nazwie (Analiza Matematyczna 1) ============================================================================\n");
         System.out.println(NarzedziaWyszukiwania.znajdzKursPoNazwie(kursy, "Analiza Matematyczna 1"));

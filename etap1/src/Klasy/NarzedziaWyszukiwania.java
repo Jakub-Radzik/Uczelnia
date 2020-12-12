@@ -141,10 +141,21 @@ public class NarzedziaWyszukiwania {
         return null;
     }
 
+    //Rok
     public static ArrayList<Student> znajdzStudentowPoRokuStudiow(ArrayList<Osoba> osoby, int rok) {
         ArrayList<Student> zwrot = new ArrayList<>();
         for (Osoba osoba : osoby) {
             if (osoba instanceof Student && ((Student) osoba).getRokStudiow() == rok) {
+                zwrot.add((Student) osoba);
+            }
+        }
+        return zwrot;
+    }
+    //Kierunek
+    public static ArrayList<Student> znajdzStudentowPoKierunku(ArrayList<Osoba> osoby, String kierunek) {
+        ArrayList<Student> zwrot = new ArrayList<>();
+        for (Osoba osoba : osoby) {
+            if (osoba instanceof Student && ((Student) osoba).getKierunek().toLowerCase().equals(kierunek.toLowerCase())) {
                 zwrot.add((Student) osoba);
             }
         }
