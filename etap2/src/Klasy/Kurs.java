@@ -45,7 +45,7 @@ public class Kurs implements Serializable {
     public String toString() {
         return "Klasy.Kurs{" +
                 "nazwaKursu='" + nazwaKursu + '\'' +
-                ", prowadzacy=" + prowadzacy.getImie() +" "+ prowadzacy.getNazwisko()+
+                ", prowadzacy=" + prowadzacy.getImie() + " " + prowadzacy.getNazwisko() +
                 ", ects=" + ects +
                 '}';
     }

@@ -5,20 +5,20 @@ import java.util.ArrayList;
 public class NarzedziaWyszukiwania {
 
     //Znajdowanie Pracownika lub Studenta po imieniu i nazwisku
-    public static ArrayList<Osoba> znajdzOsobyPoImieniu(ArrayList<Osoba> osoby, String imie){
+    public static ArrayList<Osoba> znajdzOsobyPoImieniu(ArrayList<Osoba> osoby, String imie) {
         ArrayList<Osoba> zwrot = new ArrayList<>();
-        for (Osoba osoba: osoby) {
-            if(osoba.getImie().equals(imie)){
+        for (Osoba osoba : osoby) {
+            if (osoba.getImie().equals(imie)) {
                 zwrot.add(osoba);
             }
         }
         return zwrot;
     }
 
-    public static ArrayList<Osoba> znajdzOsobyPoNazwisku(ArrayList<Osoba> osoby, String nazwisko){
+    public static ArrayList<Osoba> znajdzOsobyPoNazwisku(ArrayList<Osoba> osoby, String nazwisko) {
         ArrayList<Osoba> zwrot = new ArrayList<>();
-        for (Osoba osoba: osoby) {
-            if(osoba.getNazwisko().equals(nazwisko)){
+        for (Osoba osoba : osoby) {
+            if (osoba.getNazwisko().equals(nazwisko)) {
                 zwrot.add(osoba);
             }
         }
@@ -27,61 +27,61 @@ public class NarzedziaWyszukiwania {
 
     //PRACOWNICY
     //STAŻ
-    public static ArrayList<Pracownik_Uczelni> znajdzPracownikowPoStazuPracyWiekszymNiz(ArrayList<Osoba> pracownicyUczelni, int staz){
+    public static ArrayList<Pracownik_Uczelni> znajdzPracownikowPoStazuPracyWiekszymNiz(ArrayList<Osoba> pracownicyUczelni, int staz) {
         ArrayList<Pracownik_Uczelni> pracownicyZwrot = new ArrayList<>();
-        for (Osoba osoba: pracownicyUczelni) {
-            if(osoba instanceof Pracownik_Uczelni && ((Pracownik_Uczelni)osoba).getStazPracy()>staz){
-                pracownicyZwrot.add((Pracownik_Uczelni)osoba);
+        for (Osoba osoba : pracownicyUczelni) {
+            if (osoba instanceof Pracownik_Uczelni && ((Pracownik_Uczelni) osoba).getStazPracy() > staz) {
+                pracownicyZwrot.add((Pracownik_Uczelni) osoba);
             }
         }
         return pracownicyZwrot;
     }
 
-    public static ArrayList<Pracownik_Uczelni> znajdzPracownikowPoStazuPracyMniejszymNiz(ArrayList<Osoba> pracownicyUczelni, int staz){
+    public static ArrayList<Pracownik_Uczelni> znajdzPracownikowPoStazuPracyMniejszymNiz(ArrayList<Osoba> pracownicyUczelni, int staz) {
         ArrayList<Pracownik_Uczelni> pracownicyZwrot = new ArrayList<>();
-        for (Osoba osoba: pracownicyUczelni) {
-            if(osoba instanceof Pracownik_Uczelni && ((Pracownik_Uczelni)osoba).getStazPracy()<staz){
-                pracownicyZwrot.add((Pracownik_Uczelni)osoba);
+        for (Osoba osoba : pracownicyUczelni) {
+            if (osoba instanceof Pracownik_Uczelni && ((Pracownik_Uczelni) osoba).getStazPracy() < staz) {
+                pracownicyZwrot.add((Pracownik_Uczelni) osoba);
             }
         }
         return pracownicyZwrot;
     }
 
-    public static ArrayList<Pracownik_Uczelni> znajdzPracownikowPoStazuPracyRownym(ArrayList<Osoba> pracownicyUczelni, int staz){
+    public static ArrayList<Pracownik_Uczelni> znajdzPracownikowPoStazuPracyRownym(ArrayList<Osoba> pracownicyUczelni, int staz) {
         ArrayList<Pracownik_Uczelni> pracownicyZwrot = new ArrayList<>();
-        for (Osoba osoba: pracownicyUczelni) {
-            if(osoba instanceof Pracownik_Uczelni && ((Pracownik_Uczelni)osoba).getStazPracy()==staz){
-                pracownicyZwrot.add((Pracownik_Uczelni)osoba);
+        for (Osoba osoba : pracownicyUczelni) {
+            if (osoba instanceof Pracownik_Uczelni && ((Pracownik_Uczelni) osoba).getStazPracy() == staz) {
+                pracownicyZwrot.add((Pracownik_Uczelni) osoba);
             }
         }
         return pracownicyZwrot;
     }
 
     //NADGODZINY
-    public static ArrayList<Pracownik_Administracyjny> znajdzPracownikowPoNadgodzinachWiekszychNiz(ArrayList<Osoba> osoby, int nadgodzin){
+    public static ArrayList<Pracownik_Administracyjny> znajdzPracownikowPoNadgodzinachWiekszychNiz(ArrayList<Osoba> osoby, int nadgodzin) {
         ArrayList<Pracownik_Administracyjny> pracownicyZwrot = new ArrayList<>();
-        for (Osoba osoba: osoby) {
-            if(osoba instanceof  Pracownik_Administracyjny && ((Pracownik_Administracyjny)osoba).getLiczba_nadgodzin()>nadgodzin){
+        for (Osoba osoba : osoby) {
+            if (osoba instanceof Pracownik_Administracyjny && ((Pracownik_Administracyjny) osoba).getLiczba_nadgodzin() > nadgodzin) {
                 pracownicyZwrot.add((Pracownik_Administracyjny) osoba);
             }
         }
         return pracownicyZwrot;
     }
 
-    public static ArrayList<Pracownik_Administracyjny> znajdzPracownikowPoNadgodzinachMniejszychNiz(ArrayList<Osoba> osoby, int nadgodzin){
+    public static ArrayList<Pracownik_Administracyjny> znajdzPracownikowPoNadgodzinachMniejszychNiz(ArrayList<Osoba> osoby, int nadgodzin) {
         ArrayList<Pracownik_Administracyjny> pracownicyZwrot = new ArrayList<>();
-        for (Osoba osoba: osoby) {
-            if(osoba instanceof  Pracownik_Administracyjny && ((Pracownik_Administracyjny)osoba).getLiczba_nadgodzin()<nadgodzin){
+        for (Osoba osoba : osoby) {
+            if (osoba instanceof Pracownik_Administracyjny && ((Pracownik_Administracyjny) osoba).getLiczba_nadgodzin() < nadgodzin) {
                 pracownicyZwrot.add((Pracownik_Administracyjny) osoba);
             }
         }
         return pracownicyZwrot;
     }
 
-    public static ArrayList<Pracownik_Administracyjny> znajdzPracownikowPoNadgodzinachRownych(ArrayList<Osoba> osoby, int nadgodzin){
+    public static ArrayList<Pracownik_Administracyjny> znajdzPracownikowPoNadgodzinachRownych(ArrayList<Osoba> osoby, int nadgodzin) {
         ArrayList<Pracownik_Administracyjny> pracownicyZwrot = new ArrayList<>();
-        for (Osoba osoba: osoby) {
-            if(osoba instanceof  Pracownik_Administracyjny && ((Pracownik_Administracyjny)osoba).getLiczba_nadgodzin()==nadgodzin){
+        for (Osoba osoba : osoby) {
+            if (osoba instanceof Pracownik_Administracyjny && ((Pracownik_Administracyjny) osoba).getLiczba_nadgodzin() == nadgodzin) {
                 pracownicyZwrot.add((Pracownik_Administracyjny) osoba);
             }
         }
@@ -89,30 +89,30 @@ public class NarzedziaWyszukiwania {
     }
 
     //PENSJA
-    public static ArrayList<Pracownik_Uczelni> znajdzPracownikowPoPensjiWiekszejNiz(ArrayList<Osoba> osoby, int pensja){
+    public static ArrayList<Pracownik_Uczelni> znajdzPracownikowPoPensjiWiekszejNiz(ArrayList<Osoba> osoby, int pensja) {
         ArrayList<Pracownik_Uczelni> pracownicyZwrot = new ArrayList<>();
-        for (Osoba pracownik: osoby) {
-            if(pracownik instanceof Pracownik_Uczelni && ((Pracownik_Uczelni) pracownik).getPensja()>pensja){
+        for (Osoba pracownik : osoby) {
+            if (pracownik instanceof Pracownik_Uczelni && ((Pracownik_Uczelni) pracownik).getPensja() > pensja) {
                 pracownicyZwrot.add((Pracownik_Uczelni) pracownik);
             }
         }
         return pracownicyZwrot;
     }
 
-    public static ArrayList<Pracownik_Uczelni> znajdzPracownikowPoPensjiMniejszejNiz(ArrayList<Osoba> osoby, int pensja){
+    public static ArrayList<Pracownik_Uczelni> znajdzPracownikowPoPensjiMniejszejNiz(ArrayList<Osoba> osoby, int pensja) {
         ArrayList<Pracownik_Uczelni> pracownicyZwrot = new ArrayList<>();
-        for (Osoba pracownik: osoby) {
-            if(pracownik instanceof Pracownik_Uczelni && ((Pracownik_Uczelni) pracownik).getPensja()<pensja){
+        for (Osoba pracownik : osoby) {
+            if (pracownik instanceof Pracownik_Uczelni && ((Pracownik_Uczelni) pracownik).getPensja() < pensja) {
                 pracownicyZwrot.add((Pracownik_Uczelni) pracownik);
             }
         }
         return pracownicyZwrot;
     }
 
-    public static ArrayList<Pracownik_Uczelni> znajdzPracownikowPoPensjiRownej(ArrayList<Osoba> osoby, int pensja){
+    public static ArrayList<Pracownik_Uczelni> znajdzPracownikowPoPensjiRownej(ArrayList<Osoba> osoby, int pensja) {
         ArrayList<Pracownik_Uczelni> pracownicyZwrot = new ArrayList<>();
-        for (Osoba pracownik: osoby) {
-            if(pracownik instanceof Pracownik_Uczelni && ((Pracownik_Uczelni) pracownik).getPensja()==pensja){
+        for (Osoba pracownik : osoby) {
+            if (pracownik instanceof Pracownik_Uczelni && ((Pracownik_Uczelni) pracownik).getPensja() == pensja) {
                 pracownicyZwrot.add((Pracownik_Uczelni) pracownik);
             }
         }
@@ -120,10 +120,10 @@ public class NarzedziaWyszukiwania {
     }
 
     //STANOWISKO
-    public static ArrayList<Pracownik_Uczelni> znajdzPracownikowPoStanowisku(ArrayList<Osoba> osoby, String stanowisko){
+    public static ArrayList<Pracownik_Uczelni> znajdzPracownikowPoStanowisku(ArrayList<Osoba> osoby, String stanowisko) {
         ArrayList<Pracownik_Uczelni> pracownicyZwrot = new ArrayList<>();
-        for (Osoba osoba: osoby) {
-            if(osoba instanceof Pracownik_Uczelni && ((Pracownik_Uczelni) osoba).getStanowisko().toLowerCase().equals(stanowisko.toLowerCase())){
+        for (Osoba osoba : osoby) {
+            if (osoba instanceof Pracownik_Uczelni && ((Pracownik_Uczelni) osoba).getStanowisko().toLowerCase().equals(stanowisko.toLowerCase())) {
                 pracownicyZwrot.add((Pracownik_Uczelni) osoba);
             }
         }
@@ -132,18 +132,18 @@ public class NarzedziaWyszukiwania {
 
     //STDUENCI
     //NUMER INDEKSU
-    public static Student znajdzStudentaPoIndeksie(ArrayList<Osoba> osoby, String indeks){
-        for (Osoba osoba: osoby) {
-            if(osoba instanceof Student && ((Student) osoba).getNumer_indeksu().equals(indeks)){
+    public static Student znajdzStudentaPoIndeksie(ArrayList<Osoba> osoby, String indeks) {
+        for (Osoba osoba : osoby) {
+            if (osoba instanceof Student && ((Student) osoba).getNumer_indeksu().equals(indeks)) {
                 return (Student) osoba;
             }
         }
         return null;
     }
 
-    public static ArrayList<Student> znajdzStudentowPoRokuStudiow(ArrayList<Osoba> osoby, int rok){
+    public static ArrayList<Student> znajdzStudentowPoRokuStudiow(ArrayList<Osoba> osoby, int rok) {
         ArrayList<Student> zwrot = new ArrayList<>();
-        for (Osoba osoba: osoby) {
+        for (Osoba osoba : osoby) {
             if (osoba instanceof Student && ((Student) osoba).getRokStudiow() == rok) {
                 zwrot.add((Student) osoba);
             }
@@ -153,7 +153,7 @@ public class NarzedziaWyszukiwania {
 
     //KURS
 
-    public static Kurs znajdzKursPoNazwie(ArrayList<Kurs> kursy, String nazwa){
+    public static Kurs znajdzKursPoNazwie(ArrayList<Kurs> kursy, String nazwa) {
         for (Kurs kurs : kursy) {
             if (kurs.getNazwaKursu().toLowerCase().equals(nazwa.toLowerCase())) {
                 return kurs;
@@ -162,9 +162,9 @@ public class NarzedziaWyszukiwania {
         return null;
     }
 
-    public static ArrayList<Kurs> znajdzKursyPoProwadzacym(ArrayList<Kurs> kursy, Osoba prowadzadcy){
+    public static ArrayList<Kurs> znajdzKursyPoProwadzacym(ArrayList<Kurs> kursy, Osoba prowadzadcy) {
         ArrayList<Kurs> zwrot = new ArrayList<>();
-        for (Kurs kurs: kursy) {
+        for (Kurs kurs : kursy) {
             if (kurs.getProwadzacy().equals(prowadzadcy)) {
                 zwrot.add(kurs);
             }
@@ -172,10 +172,10 @@ public class NarzedziaWyszukiwania {
         return zwrot;
     }
 
-    public static ArrayList<Kurs> znajdzKursyPoECTS(ArrayList<Kurs> kursy, int ects){
+    public static ArrayList<Kurs> znajdzKursyPoECTS(ArrayList<Kurs> kursy, int ects) {
         ArrayList<Kurs> zwrot = new ArrayList<>();
-        for (Kurs kurs: kursy) {
-            if (kurs.getEcts()==ects) {
+        for (Kurs kurs : kursy) {
+            if (kurs.getEcts() == ects) {
                 zwrot.add(kurs);
             }
         }

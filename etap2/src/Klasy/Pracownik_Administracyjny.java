@@ -24,6 +24,6 @@ public class Pracownik_Administracyjny extends Pracownik_Uczelni implements Seri
 
     @Override
     public String toString() {
-        return super.toString()+ "liczba_nadgodzin=" + liczba_nadgodzin;
+        return super.toString() + "liczba_nadgodzin=" + liczba_nadgodzin;
     }
 }

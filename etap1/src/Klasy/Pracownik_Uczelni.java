@@ -1,6 +1,6 @@
 package Klasy;
 
-public abstract class Pracownik_Uczelni extends Osoba{
+public abstract class Pracownik_Uczelni extends Osoba {
     private String stanowisko;
     private int stazPracy;
     private double pensja;
@@ -42,9 +42,9 @@ public abstract class Pracownik_Uczelni extends Osoba{
 
     @Override
     public String toString() {
-        return super.toString()+
+        return super.toString() +
                 "stanowisko='" + stanowisko + '\'' +
                 ", stazPracy=" + stazPracy +
-                ", pensja=" + pensja+" ";
+                ", pensja=" + pensja + " ";
     }
 }

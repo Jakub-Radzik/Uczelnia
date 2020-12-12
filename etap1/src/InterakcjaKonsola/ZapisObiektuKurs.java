@@ -4,7 +4,7 @@ import Klasy.Kurs;
 
 import java.util.Scanner;
 
-public class ZapisObiektuKurs implements ZapisObiektu{
+public class ZapisObiektuKurs implements ZapisObiektu {
     @Override
     public Kurs saveObject() {
 

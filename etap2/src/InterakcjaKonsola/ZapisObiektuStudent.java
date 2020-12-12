@@ -1,12 +1,10 @@
 package InterakcjaKonsola;
 
-import Klasy.Osoba;
 import Klasy.Student;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
-public class ZapisObiektuStudent implements ZapisObiektu{
+public class ZapisObiektuStudent implements ZapisObiektu {
     @Override
     public Student saveObject() {
 
@@ -17,23 +15,23 @@ public class ZapisObiektuStudent implements ZapisObiektu{
         myStudent.setRokStudiow(scanner.nextInt());
 
         System.out.println("Czy student jest uczestnikiem erasmusa? [T/N]:");
-        if (scanner.nextLine().toLowerCase().equals("t") || scanner.nextLine().toLowerCase().equals("tak")){
+        if (scanner.nextLine().toLowerCase().equals("t") || scanner.nextLine().toLowerCase().equals("tak")) {
             myStudent.setJestUczestnikiemErasmusa(true);
-        }else {
+        } else {
             myStudent.setJestUczestnikiemErasmusa(false);
         }
 
         System.out.println("Czy student jest studentem 1 stopnia? [T/N]:");
-        if(scanner.nextLine().toLowerCase().equals("t") || scanner.nextLine().toLowerCase().equals("tak")){
+        if (scanner.nextLine().toLowerCase().equals("t") || scanner.nextLine().toLowerCase().equals("tak")) {
             myStudent.setJestStudentemIstopnia(true);
-        }else {
+        } else {
             myStudent.setJestStudentemIstopnia(false);
         }
 
         System.out.println("Czy student jest studentem stacjonarnym? [T/N]:");
-        if(scanner.nextLine().toLowerCase().equals("t") || scanner.nextLine().toLowerCase().equals("tak")){
+        if (scanner.nextLine().toLowerCase().equals("t") || scanner.nextLine().toLowerCase().equals("tak")) {
             myStudent.setJestStudentemStacjonarnym(true);
-        }else {
+        } else {
             myStudent.setJestStudentemStacjonarnym(false);
         }
 

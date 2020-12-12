@@ -76,14 +76,14 @@ public class Student extends Osoba implements Serializable {
     @Override
     public String toString() {
         StringBuilder kursyTxt = new StringBuilder();
-        if(listaKursow!=null){
-            for (Kurs kurs: listaKursow) {
+        if (listaKursow != null) {
+            for (Kurs kurs : listaKursow) {
                 kursyTxt.append(kurs.toString()).append("\n");
             }
         }
 
 
-        return super.toString()+
+        return super.toString() +
                 "numer_indeksu='" + numer_indeksu + '\'' +
                 ", rokStudiow=" + rokStudiow +
                 ", jestUczestnikiemErasmusa=" + jestUczestnikiemErasmusa +

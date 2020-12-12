@@ -1,6 +1,6 @@
 package Klasy;
 
-public class Pracownik_Administracyjny extends Pracownik_Uczelni{
+public class Pracownik_Administracyjny extends Pracownik_Uczelni {
     private int liczba_nadgodzin;
 
     public Pracownik_Administracyjny() {
@@ -22,6 +22,6 @@ public class Pracownik_Administracyjny extends Pracownik_Uczelni{
 
     @Override
     public String toString() {
-        return super.toString()+ "liczba_nadgodzin=" + liczba_nadgodzin;
+        return super.toString() + "liczba_nadgodzin=" + liczba_nadgodzin;
     }
 }

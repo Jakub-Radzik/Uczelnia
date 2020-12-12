@@ -24,6 +24,6 @@ public class Pracownik_Badawczo_Dydaktyczny extends Pracownik_Uczelni implements
 
     @Override
     public String toString() {
-        return super.toString()+"dorobekNaukowy=" + dorobekNaukowy;
+        return super.toString() + "dorobekNaukowy=" + dorobekNaukowy;
     }
 }

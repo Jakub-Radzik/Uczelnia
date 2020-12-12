@@ -2,7 +2,7 @@ package Klasy;
 
 import java.io.Serializable;
 
-public abstract class Osoba implements Serializable {
+public abstract class Osoba{
     private String imie;
     private String nazwisko;
     private String pesel;

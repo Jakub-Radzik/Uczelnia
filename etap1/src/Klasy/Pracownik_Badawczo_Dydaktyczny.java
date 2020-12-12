@@ -1,6 +1,6 @@
 package Klasy;
 
-public class Pracownik_Badawczo_Dydaktyczny extends Pracownik_Uczelni{
+public class Pracownik_Badawczo_Dydaktyczny extends Pracownik_Uczelni {
     private int dorobekNaukowy;
 
     public Pracownik_Badawczo_Dydaktyczny(String imie, String nazwisko, String pesel, int wiek, String plec, String stanowisko, int stazPracy, double pensja, int dorobek_naukowy) {
@@ -22,6 +22,6 @@ public class Pracownik_Badawczo_Dydaktyczny extends Pracownik_Uczelni{
 
     @Override
     public String toString() {
-        return super.toString()+"dorobekNaukowy=" + dorobekNaukowy;
+        return super.toString() + "dorobekNaukowy=" + dorobekNaukowy;
     }
 }

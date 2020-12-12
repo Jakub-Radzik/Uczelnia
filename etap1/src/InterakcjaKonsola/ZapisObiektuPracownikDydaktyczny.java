@@ -1,12 +1,10 @@
 package InterakcjaKonsola;
 
-import Klasy.Pracownik_Administracyjny;
 import Klasy.Pracownik_Badawczo_Dydaktyczny;
-import Klasy.Pracownik_Uczelni;
 
 import java.util.Scanner;
 
-public class ZapisObiektuPracownikDydaktyczny implements ZapisObiektu{
+public class ZapisObiektuPracownikDydaktyczny implements ZapisObiektu {
     @Override
     public Object saveObject() {
         Scanner scanner = new Scanner(System.in);

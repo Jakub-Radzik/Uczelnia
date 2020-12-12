@@ -6,7 +6,7 @@ import Klasy.Pracownik_Uczelni;
 import java.util.Scanner;
 
 public abstract class AbstractCreator {
-    protected static Osoba personCreator(Osoba person){
+    protected static Osoba personCreator(Osoba person) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Wprowadź imię:");
         person.setImie(scanner.nextLine());
@@ -21,7 +21,7 @@ public abstract class AbstractCreator {
         return person;
     }
 
-    protected static Osoba workerCreator(Pracownik_Uczelni worker){
+    protected static Osoba workerCreator(Pracownik_Uczelni worker) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj stanowisko");
         worker.setStanowisko(scanner.nextLine());

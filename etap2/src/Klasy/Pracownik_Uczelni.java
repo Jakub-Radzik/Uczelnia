@@ -44,9 +44,9 @@ public abstract class Pracownik_Uczelni extends Osoba implements Serializable {
 
     @Override
     public String toString() {
-        return super.toString()+
+        return super.toString() +
                 "stanowisko='" + stanowisko + '\'' +
                 ", stazPracy=" + stazPracy +
-                ", pensja=" + pensja+" ";
+                ", pensja=" + pensja + " ";
     }
 }

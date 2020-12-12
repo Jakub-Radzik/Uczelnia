@@ -1,6 +1,6 @@
 package Klasy;
 
-public class Kurs{
+public class Kurs {
     private String nazwaKursu;
     private Pracownik_Badawczo_Dydaktyczny prowadzacy;
     private int ects;
@@ -43,7 +43,7 @@ public class Kurs{
     public String toString() {
         return "Klasy.Kurs{" +
                 "nazwaKursu='" + nazwaKursu + '\'' +
-                ", prowadzacy=" + prowadzacy.getImie() +" "+ prowadzacy.getNazwisko()+
+                ", prowadzacy=" + prowadzacy.getImie() + " " + prowadzacy.getNazwisko() +
                 ", ects=" + ects +
                 '}';
     }
