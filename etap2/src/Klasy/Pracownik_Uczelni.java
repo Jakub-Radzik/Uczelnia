@@ -2,7 +2,7 @@ package Klasy;
 
 import java.io.Serializable;
 
-public abstract class Pracownik_Uczelni extends Osoba implements Serializable {
+public abstract class Pracownik_Uczelni extends Osoba implements Serializable{
     private String stanowisko;
     private int stazPracy;
     private double pensja;

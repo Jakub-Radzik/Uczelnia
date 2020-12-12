@@ -11,8 +11,7 @@ public class ZapisObiektuPracownikDydaktyczny implements ZapisObiektu {
         Pracownik_Badawczo_Dydaktyczny pracownik = new Pracownik_Badawczo_Dydaktyczny();
         AbstractCreator.personCreator(pracownik);
         AbstractCreator.workerCreator(pracownik);
-        System.out.println("Podaj dorobek naukowy");
-        pracownik.setDorobekNaukowy(scanner.nextInt());
+        pracownik.setDorobekNaukowy(AbstractCreator.isIntegerAndCorrect("dorobek naukowy"));
         return pracownik;
     }
 }

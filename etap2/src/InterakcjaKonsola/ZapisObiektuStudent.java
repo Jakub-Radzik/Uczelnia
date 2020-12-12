@@ -11,8 +11,9 @@ public class ZapisObiektuStudent implements ZapisObiektu {
         Scanner scanner = new Scanner(System.in);
         Student myStudent = new Student();
         AbstractCreator.personCreator(myStudent);
-        System.out.println("Wprowadź rok studiów:");
-        myStudent.setRokStudiow(scanner.nextInt());
+        myStudent.setRokStudiow(AbstractCreator.isIntegerAndCorrect("rok studiów"));
+        myStudent.setKierunek(AbstractCreator.checkStringHasOnlyLetters("kierunek studiów"));
+
 
         System.out.println("Czy student jest uczestnikiem erasmusa? [T/N]:");
         if (scanner.nextLine().toLowerCase().equals("t") || scanner.nextLine().toLowerCase().equals("tak")) {

@@ -3,16 +3,17 @@ package Klasy;
 import java.io.Serializable;
 import java.util.List;
 
-public class Student extends Osoba implements Serializable {
+public class Student extends Osoba implements Serializable{
     private String numer_indeksu;
     private List<Kurs> listaKursow;
     private int rokStudiow;
+    private String kierunek;
     private boolean jestUczestnikiemErasmusa;
     private boolean jestStudentemIstopnia;
     private boolean jestStudentemStacjonarnym;
 
 
-    public Student(String imie, String nazwisko, String pesel, int wiek, String plec, String numer_indeksu, List<Kurs> listaKursow, boolean jestUczestnikiemErasmusa, boolean jestStudentemIstopnia, boolean jestStudentemStacjonarnym, int rokStudiow) {
+    public Student(String imie, String nazwisko, String pesel, int wiek, String plec, String numer_indeksu, List<Kurs> listaKursow, boolean jestUczestnikiemErasmusa, boolean jestStudentemIstopnia, boolean jestStudentemStacjonarnym, int rokStudiow, String kierunek) {
         super(imie, nazwisko, pesel, wiek, plec);
         this.numer_indeksu = numer_indeksu;
         this.listaKursow = listaKursow;
@@ -20,9 +21,20 @@ public class Student extends Osoba implements Serializable {
         this.jestStudentemIstopnia = jestStudentemIstopnia;
         this.jestStudentemStacjonarnym = jestStudentemStacjonarnym;
         this.rokStudiow = rokStudiow;
+        this.kierunek = kierunek;
     }
 
     public Student() {
+    }
+
+
+
+    public String getKierunek() {
+        return kierunek;
+    }
+
+    public void setKierunek(String kierunek) {
+        this.kierunek = kierunek;
     }
 
     public int getRokStudiow() {
@@ -86,6 +98,7 @@ public class Student extends Osoba implements Serializable {
         return super.toString() +
                 "numer_indeksu='" + numer_indeksu + '\'' +
                 ", rokStudiow=" + rokStudiow +
+                ", kierunek=" + kierunek +
                 ", jestUczestnikiemErasmusa=" + jestUczestnikiemErasmusa +
                 ", jestStudentemIstopnia=" + jestStudentemIstopnia +
                 ", jestStudentemStacjonarnym=" + jestStudentemStacjonarnym

@@ -11,9 +11,7 @@ public class ZapisObiektuPracownikAdministracji implements ZapisObiektu {
         Pracownik_Administracyjny pracownik = new Pracownik_Administracyjny();
         AbstractCreator.personCreator(pracownik);
         AbstractCreator.workerCreator(pracownik);
-
-        System.out.println("Podaj liczbe nadgodzin");
-        pracownik.setLiczba_nadgodzin(scanner.nextInt());
+        pracownik.setLiczba_nadgodzin(AbstractCreator.isIntegerAndCorrect("liczbę nadgodzin"));
         return pracownik;
     }
 }
