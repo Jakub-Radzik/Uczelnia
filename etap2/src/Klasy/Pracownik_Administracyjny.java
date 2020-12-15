@@ -1,8 +1,6 @@
 package Klasy;
 
-import java.io.Serializable;
-
-public class Pracownik_Administracyjny extends Pracownik_Uczelni implements Serializable {
+public class Pracownik_Administracyjny extends Pracownik_Uczelni{
     private int liczba_nadgodzin;
 
     public Pracownik_Administracyjny() {

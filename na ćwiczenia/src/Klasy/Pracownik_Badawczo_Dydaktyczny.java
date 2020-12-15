@@ -8,6 +8,10 @@ public class Pracownik_Badawczo_Dydaktyczny extends Pracownik_Uczelni{
         this.dorobekNaukowy = dorobek_naukowy;
     }
 
+    public Pracownik_Badawczo_Dydaktyczny() {
+
+    }
+
     public int getDorobekNaukowy() {
         return dorobekNaukowy;
     }
@@ -18,6 +22,6 @@ public class Pracownik_Badawczo_Dydaktyczny extends Pracownik_Uczelni{
 
     @Override
     public String toString() {
-        return super.toString()+"dorobekNaukowy=" + dorobekNaukowy;
+        return super.toString() + "dorobekNaukowy=" + dorobekNaukowy;
     }
 }

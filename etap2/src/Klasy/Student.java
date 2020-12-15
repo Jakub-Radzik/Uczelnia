@@ -1,9 +1,8 @@
 package Klasy;
 
-import java.io.Serializable;
 import java.util.List;
 
-public class Student extends Osoba implements Serializable{
+public class Student extends Osoba{
     private String numer_indeksu;
     private List<Kurs> listaKursow;
     private int rokStudiow;

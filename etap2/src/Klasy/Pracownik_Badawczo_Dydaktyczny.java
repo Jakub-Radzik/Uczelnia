@@ -1,8 +1,6 @@
 package Klasy;
 
-import java.io.Serializable;
-
-public class Pracownik_Badawczo_Dydaktyczny extends Pracownik_Uczelni implements Serializable{
+public class Pracownik_Badawczo_Dydaktyczny extends Pracownik_Uczelni{
     private int dorobekNaukowy;
 
     public Pracownik_Badawczo_Dydaktyczny(String imie, String nazwisko, String pesel, int wiek, String plec, String stanowisko, int stazPracy, double pensja, int dorobek_naukowy) {

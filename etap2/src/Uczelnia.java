@@ -71,7 +71,7 @@ public class Uczelnia {
 
     }
 
-    public void realizacjap34() {
+    public void displayAllInfo() {
 
         //REALIZACJA PUNKTU 3 - wszystkie metody
         System.out.println("REALIZACJA PUNKTU 3\n");
@@ -291,9 +291,9 @@ public class Uczelnia {
         scanner.close();
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         Uczelnia uczelnia = new Uczelnia();
-//        uczelnia.realizacjap34();
+//        uczelnia.displayAllInfo();
 //        startInteraction(uczelnia);
 
         SerializacjaOsob.serializacja(uczelnia.osoby);

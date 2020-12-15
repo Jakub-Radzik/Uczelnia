@@ -1,6 +1,8 @@
 package Klasy;
 
-public class Kurs{
+import java.io.Serializable;
+
+public class Kurs implements Serializable {
     private String nazwaKursu;
     private Pracownik_Badawczo_Dydaktyczny prowadzacy;
     private int ects;
@@ -9,6 +11,10 @@ public class Kurs{
         this.nazwaKursu = nazwaKursu;
         this.prowadzacy = prowadzacy;
         this.ects = ects;
+    }
+
+    public Kurs() {
+
     }
 
     public String getNazwaKursu() {
@@ -39,7 +45,7 @@ public class Kurs{
     public String toString() {
         return "Klasy.Kurs{" +
                 "nazwaKursu='" + nazwaKursu + '\'' +
-                ", prowadzacy=" + prowadzacy.getImie() +" "+ prowadzacy.getNazwisko()+
+                ", prowadzacy=" + prowadzacy.getImie() + " " + prowadzacy.getNazwisko() +
                 ", ects=" + ects +
                 '}';
     }

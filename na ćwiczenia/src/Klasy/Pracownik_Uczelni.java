@@ -12,6 +12,10 @@ public abstract class Pracownik_Uczelni extends Osoba{
         this.pensja = pensja;
     }
 
+    public Pracownik_Uczelni() {
+        super();
+    }
+
     public String getStanowisko() {
         return stanowisko;
     }
@@ -38,9 +42,9 @@ public abstract class Pracownik_Uczelni extends Osoba{
 
     @Override
     public String toString() {
-        return super.toString()+
+        return super.toString() +
                 "stanowisko='" + stanowisko + '\'' +
                 ", stazPracy=" + stazPracy +
-                ", pensja=" + pensja+" ";
+                ", pensja=" + pensja + " ";
     }
 }
