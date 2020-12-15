@@ -14,7 +14,7 @@ public abstract class AbstractCreator {
         do{
             System.out.println("Wprowadź "+description+":");
             txt = scanner.nextLine();
-        }while((txt).chars().allMatch(Character::isDigit)); //Sprawdzam czy istnieją cyfry bo może posiadać spacje które nie są literami
+        }while((txt).chars().anyMatch(Character::isDigit)); //Sprawdzam czy istnieją cyfry bo może posiadać spacje które nie są literami
         return txt;
     }
     protected static String checkStringHasOnlyNumbers(String description){
