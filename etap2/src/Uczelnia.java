@@ -71,7 +71,7 @@ public class Uczelnia {
 
     }
 
-    public void displayAllInfo() {
+    public void realizacjap34() {
 
         //REALIZACJA PUNKTU 3 - wszystkie metody
         System.out.println("REALIZACJA PUNKTU 3\n");
@@ -160,145 +160,229 @@ public class Uczelnia {
         System.out.println("____________________________________");
         System.out.println("\uD83C\uDF93 WITAJ W MOJEJ UCZELNI \uD83C\uDF93");
         System.out.println();
+        System.out.println("[0] - zakończ");
         System.out.println("[1] - dodać kurs");
         System.out.println("[2] - dodać studenta");
         System.out.println("[3] - dodać pracownika administracji");
         System.out.println("[4] - dodać pracownika dydaktycznego");
+        System.out.println("[5] - Operacje wyświetlania");
         System.out.println("____________________________________");
     }
 
     public static void startInteraction(Uczelnia uczelnia) {
-
         Scanner scanner = new Scanner(System.in);
-        uczelnia.menu();
-        // Rozpoczynamy interakcje w menu
-        // wybor przechowuje oznaczenie wyboru operacji
-        int wybor = 0;
+        boolean breakTheLoop = false;
+        while(true){
+            // Rozpoczynamy interakcje w menu
+            // wybor przechowuje oznaczenie wyboru operacji
+            int wybor = 0;
+            uczelnia.menu();
 
         /*
             do-while wykona się co najmniej raz i więcej jeśli operacja będzie źle wybrana
             warunek w while obsługuje przypadki liczb całkowitych poza zakresem
             InputMismatchException działa w przypadku liczb nie całkowitych
          */
-        do {
-            System.out.println("Wybierz operacje:");
-            try {
-                wybor = scanner.nextInt();
-            } catch (InputMismatchException ex) {
-                scanner.next();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        } while (wybor < 1 || wybor > 4);
+            do {
+                System.out.println("Wybierz operacje:");
+                try {
+                    wybor = scanner.nextInt();
+                } catch (InputMismatchException ex) {
+                    scanner.next();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            } while (wybor < 0 || wybor > 5);
+            switch (wybor) {
+                case 0 -> {
+                    breakTheLoop = true;
+                }
+                case 1 -> { // tworzenie nowego kursu
+                    //Zmiana strategii i zapisanie kursu do tablicy z kursami
+                    uczelnia.setZapisObiektu(new ZapisObiektuKurs());
+                    uczelnia.kursy.add((Kurs) uczelnia.zapisObiektu.saveObject());
 
+                    //W związku z kłopotami z odczytem listy pracowników, operacja wyboru prowadzącego jest wykonywana tutaj
+                    //prezentacja wyboru pracownika dydaktycznego
+                    //AtomicInteger potrzebny gdyż z każdym wyswietleniem osoby inkrementuję i zwracam numer
+                    AtomicInteger c = new AtomicInteger();
+                    System.out.println("[0] - Utwórz nowego prowadzącego");
+                    uczelnia.osoby.stream()
+                            .filter(osoba -> osoba instanceof Pracownik_Badawczo_Dydaktyczny)
+                            .forEach(osoba -> System.out.println("[" + (c.incrementAndGet()) + "] - " + osoba.getImie() + " " + osoba.getNazwisko()));
 
-        switch (wybor) {
-            case 1 -> { // tworzenie nowego kursu
-                //Zmiana strategii i zapisanie kursu do tablicy z kursami
-                uczelnia.setZapisObiektu(new ZapisObiektuKurs());
-                uczelnia.kursy.add((Kurs) uczelnia.zapisObiektu.saveObject());
+                    // poprawny jest wybor całkowity od 0 do ilosci prowadzacych
+                    // -1 nie jest poprawne i w tym przypadku znowu obslugujemy błędy wejścia
+                    wybor = -1;
+                    do {
+                        System.out.println("Wybierz prowadzacego:");
+                        try {
+                            wybor = scanner.nextInt();
+                        } catch (InputMismatchException ex) {
+                            scanner.next();
+                        }
 
-                //W związku z kłopotami z odczytem listy pracowników, operacja wyboru prowadzącego jest wykonywana tutaj
-                //prezentacja wyboru pracownika dydaktycznego
-                //AtomicInteger potrzebny gdyż z każdym wyswietleniem osoby inkrementuję i zwracam numer
-                AtomicInteger c = new AtomicInteger();
+                    } while (wybor < 0 || wybor > c.get());
 
-                System.out.println("[0] - Utwórz nowego prowadzącego");
-                uczelnia.osoby.stream()
-                        .filter(osoba -> osoba instanceof Pracownik_Badawczo_Dydaktyczny)
-                        .forEach(osoba -> System.out.println("[" + (c.incrementAndGet()) + "] - " + osoba.getImie() + " " + osoba.getNazwisko()));
+                    //Użytkownik może wybrać utworzenie prowadzącego zamiast przypisanie istniejącego
+                    if (wybor == 0) { //Utworzono nowy kurs i tworzymy nowego prowadzącego dla tego kursu
+                        uczelnia.setZapisObiektu(new ZapisObiektuPracownikDydaktyczny());       //Przełączenie strategii na utworzenie nowego pracownika dydaktycznego
+                        uczelnia.osoby.add((Pracownik_Badawczo_Dydaktyczny) uczelnia.zapisObiektu.saveObject());    //Po utworzeniu pracownika zapisanie go na koncu tablicy osob
+                        System.out.println("NOWY PROWADZĄCY:============================================");
+                        System.out.println(uczelnia.osoby.get(uczelnia.osoby.size() - 1));    //Nowy prowadzący jest na koncu
+                        System.out.println("NOWY KURS:==================================================");
+                        uczelnia.kursy.get(uczelnia.kursy.size() - 1).setProwadzacy((Pracownik_Badawczo_Dydaktyczny) uczelnia.osoby.get(uczelnia.osoby.size() - 1));
+                        //nowy utworzony kurs jest na koncu tablicy kursów - bierzemy go i przypisujemy mu ostatniego pracownika z zapisanych czyli nowego pracownika
 
-                // poprawny jest wybor całkowity od 0 do ilosci prowadzacych
-                // -1 nie jest poprawne i w tym przypadku znowu obslugujemy błędy wejścia
-                wybor = -1;
-                do {
-                    System.out.println("Wybierz prowadzacego:");
-                    try {
-                        wybor = scanner.nextInt();
-                    } catch (InputMismatchException ex) {
-                        scanner.next();
-                    }
-
-                } while (wybor < 0 || wybor > c.get());
-
-                //Użytkownik może wybrać utworzenie prowadzącego zamiast przypisanie istniejącego
-                if (wybor == 0) { //Utworzono nowy kurs i tworzymy nowego prowadzącego dla tego kursu
-                    uczelnia.setZapisObiektu(new ZapisObiektuPracownikDydaktyczny());       //Przełączenie strategii na utworzenie nowego pracownika dydaktycznego
-                    uczelnia.osoby.add((Pracownik_Badawczo_Dydaktyczny) uczelnia.zapisObiektu.saveObject());    //Po utworzeniu pracownika zapisanie go na koncu tablicy osob
-                    System.out.println("NOWY PROWADZĄCY:============================================");
-                    System.out.println(uczelnia.osoby.get(uczelnia.osoby.size() - 1));    //Nowy prowadzący jest na koncu
-                    System.out.println("NOWY KURS:==================================================");
-                    uczelnia.kursy.get(uczelnia.kursy.size() - 1).setProwadzacy((Pracownik_Badawczo_Dydaktyczny) uczelnia.osoby.get(uczelnia.osoby.size() - 1));
-                    //nowy utworzony kurs jest na koncu tablicy kursów - bierzemy go i przypisujemy mu ostatniego pracownika z zapisanych czyli nowego pracownika
-
-                } else { // przypisanie istniejącego prowadzącego
-                    c.set(0);
-                    for (Osoba osoba : uczelnia.osoby) {
-                        if (osoba instanceof Pracownik_Badawczo_Dydaktyczny) {
-                            c.incrementAndGet();
-                            if (c.get() == wybor) {
-                                uczelnia.kursy.get(uczelnia.kursy.size() - 1).setProwadzacy((Pracownik_Badawczo_Dydaktyczny) osoba);
+                    } else { // przypisanie istniejącego prowadzącego
+                        c.set(0);
+                        for (Osoba osoba : uczelnia.osoby) {
+                            if (osoba instanceof Pracownik_Badawczo_Dydaktyczny) {
+                                c.incrementAndGet();
+                                if (c.get() == wybor) {
+                                    uczelnia.kursy.get(uczelnia.kursy.size() - 1).setProwadzacy((Pracownik_Badawczo_Dydaktyczny) osoba);
+                                }
                             }
                         }
                     }
+                    System.out.println(uczelnia.kursy.get(uczelnia.kursy.size() - 1).toString());
+
                 }
-                System.out.println(uczelnia.kursy.get(uczelnia.kursy.size() - 1).toString());
+                case 2 -> { //Tworzenie nowego studenta
+                    //Przełączenie strategii i zapis do tablicy
+                    uczelnia.setZapisObiektu(new ZapisObiektuStudent());
+                    Student myStudent = (Student) uczelnia.zapisObiektu.saveObject();
+//                    Student myStudent = new Student();      //tymczasowo
+                    //MENU WYBORU KURSÓW:
 
-            }
-            case 2 -> { //Tworzenie nowego studenta
-                //Przełączenie strategii i zapis do tablicy
-                uczelnia.setZapisObiektu(new ZapisObiektuStudent());
-                Student myStudent = (Student) uczelnia.zapisObiektu.saveObject();
+                    AtomicInteger c = new AtomicInteger(0);
 
-                //Ustawiam podstawowe kursy dla studenta
-                myStudent.setListaKursow(Arrays.asList(uczelnia.algebra, uczelnia.analiza1));
+                    ArrayList<Kurs> kursyDoWyboru = new ArrayList<Kurs>(uczelnia.kursy);
 
-                //Tworzymy tablice z istniejącymi indeksami
-                ArrayList<String> indeksy = new ArrayList<>();
-                for (Osoba osoba : uczelnia.osoby) {
-                    if (osoba instanceof Student) {
-                        indeksy.add(((Student) osoba).getNumer_indeksu());
+                    System.out.println("\nDomyślnie student został zapisany na analizę 1 i algebrę\n");
+                    myStudent.appendCourse(uczelnia.algebra);
+                    myStudent.appendCourse(uczelnia.analiza1);
+
+                    while (true){
+                        c.set(0);
+                        if(myStudent.getListaKursow()!=null){
+                            kursyDoWyboru.removeAll(myStudent.getListaKursow());
+                        }
+
+
+                        System.out.println("WYBIERZ KURS DO PRZYPISANIA STUDENTOWI:");
+                        System.out.println("[0] - ZAKONCZ");
+                        kursyDoWyboru.forEach(kurs -> System.out.println("["+c.incrementAndGet()+"] - "+kurs.getNazwaKursu()));
+
+                        wybor = -1;
+                        do {
+                            System.out.println("Wybierz kurs do przypisania:");
+                            try {
+                                wybor = scanner.nextInt();
+                            } catch (InputMismatchException ex) {
+                                scanner.next();
+                            }
+
+                        } while (wybor < 0 || wybor > kursyDoWyboru.size());
+
+                        if(wybor!=0){
+                            myStudent.appendCourse(kursyDoWyboru.get(wybor-1));
+                        }else{
+                            break;
+                        }
                     }
-                }
 
-                //Dopoki nowy indeks nie jest unikalny generujemy nowy
-                while (true) {
-                    String newIndeks = String.valueOf(new Random().nextInt(999999999));
-                    if (!indeksy.contains(newIndeks)) {
-                        myStudent.setNumer_indeksu(newIndeks);
-                        break;
+                    //Tworzymy tablice z istniejącymi indeksami
+                    ArrayList<String> indeksy = new ArrayList<>();
+                    for (Osoba osoba : uczelnia.osoby) {
+                        if (osoba instanceof Student) {
+                            indeksy.add(((Student) osoba).getNumer_indeksu());
+                        }
                     }
+
+                    //Dopoki nowy indeks nie jest unikalny generujemy nowy
+                    while (true) {
+                        String newIndeks = String.valueOf(new Random().nextInt(999999999));
+                        if (!indeksy.contains(newIndeks)) {
+                            myStudent.setNumer_indeksu(newIndeks);
+                            break;
+                        }
+                    }
+                    uczelnia.osoby.add(myStudent);
+                    System.out.println("\nUTWORZONO NOWEGO STUDENTA:\n");
+                    System.out.println(uczelnia.osoby.get(uczelnia.osoby.size() - 1));
+
+
                 }
-                uczelnia.osoby.add(myStudent);
-                System.out.println(uczelnia.osoby.get(uczelnia.osoby.size() - 1));
-
-
+                case 3 -> {//Tworzenie pracownika administracji
+                    uczelnia.setZapisObiektu(new ZapisObiektuPracownikAdministracji());
+                    uczelnia.osoby.add((Pracownik_Administracyjny) uczelnia.zapisObiektu.saveObject());
+                    System.out.println("\nUTWORZONO NOWEGO PRACOWNIKA ADMINISTRACJI\n");
+                    System.out.println(uczelnia.osoby.get(uczelnia.osoby.size() - 1));
+                }
+                case 4 -> {//Tworzenie pracownika dydaktycznego
+                    uczelnia.setZapisObiektu(new ZapisObiektuPracownikDydaktyczny());
+                    uczelnia.osoby.add((Pracownik_Badawczo_Dydaktyczny) uczelnia.zapisObiektu.saveObject());
+                    System.out.println("\nUTWORZONO NOWEGO PRACOWNIKA NAUKOWO DYDAKTYCZNEGO\n");
+                    System.out.println(uczelnia.osoby.get(uczelnia.osoby.size() - 1));
+                }
+                case 5 -> {
+                    uczelnia.searchTool(uczelnia);
+                }
             }
-            case 3 -> {//Tworzenie pracownika administracji
-                uczelnia.setZapisObiektu(new ZapisObiektuPracownikAdministracji());
-                uczelnia.osoby.add((Pracownik_Administracyjny) uczelnia.zapisObiektu.saveObject());
-                System.out.println(uczelnia.osoby.get(uczelnia.osoby.size() - 1));
-            }
-            case 4 -> {//Tworzenie pracownika dydaktycznego
-                uczelnia.setZapisObiektu(new ZapisObiektuPracownikDydaktyczny());
-                uczelnia.osoby.add((Pracownik_Badawczo_Dydaktyczny) uczelnia.zapisObiektu.saveObject());
-                System.out.println(uczelnia.osoby.get(uczelnia.osoby.size() - 1));
+
+            if (breakTheLoop){
+                break;
             }
         }
-
-//        uczelnia.kursy.forEach(System.out::println);
 
         scanner.close();
     }
 
-    public static void main(String[] args) {
-        Uczelnia uczelnia = new Uczelnia();
-//        uczelnia.displayAllInfo();
-//        startInteraction(uczelnia);
+    public void searchTool(Uczelnia uczelnia){
+        Scanner scanner = new Scanner(System.in);
+        while(true){
 
+            System.out.println("\nWYBIERZ OPCJE WYSZUKIWANIA:");
+            System.out.println("[0] - WYJDŹ Z OPCJI WYSWIETLANIA");
+            System.out.println("[1] - wyświetl wszystkie osoby");
+            System.out.println("[2] - wyświetl wszystkie kursy");
+            System.out.println("[3] - wyświetl osoby po imieniu");
+            System.out.println("[4] - wyświetl osoby po nazwisku");
+            System.out.println();
+
+            switch(scanner.nextInt()){
+                default -> {
+                }
+                case 0 ->{
+                    return;
+                }
+                case 1 ->{
+                    uczelnia.osoby.forEach(System.out::println);
+                }
+                case 2 ->{
+                    uczelnia.kursy.forEach(System.out::println);
+                }
+                case 3 ->{
+                    scanner.nextLine();
+                    System.out.println("Wprowadz imię:");
+                    NarzedziaWyszukiwania.znajdzOsobyPoImieniu(uczelnia.osoby, scanner.nextLine()).forEach(System.out::println);
+                }
+                case 4 ->{
+                    scanner.nextLine();
+                    System.out.println("Wprowadz nazwisko:");
+                    NarzedziaWyszukiwania.znajdzOsobyPoNazwisku(uczelnia.osoby, scanner.nextLine()).forEach(System.out::println);
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args){
+        Uczelnia uczelnia = new Uczelnia();
+//        uczelnia.realizacjap34();
+//        startInteraction(uczelnia);
         SerializacjaOsob.serializacja(uczelnia.osoby);
         SerializacjaOsob.deserializacja();
-
     }
 }
 

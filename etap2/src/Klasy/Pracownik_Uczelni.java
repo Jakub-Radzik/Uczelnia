@@ -1,6 +1,6 @@
 package Klasy;
 
-public abstract class Pracownik_Uczelni extends Osoba{
+public abstract class Pracownik_Uczelni extends Osoba {
     private String stanowisko;
     private int stazPracy;
     private double pensja;

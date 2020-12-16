@@ -16,7 +16,7 @@ public class ZapisObiektuStudent implements ZapisObiektu {
 
 
         System.out.println("Czy student jest uczestnikiem erasmusa? [T/N]:");
-        if(scanner.nextLine().toLowerCase().equals("t") || scanner.nextLine().toLowerCase().equals("tak")) {
+        if (scanner.nextLine().toLowerCase().equals("t") || scanner.nextLine().toLowerCase().equals("tak")) {
             myStudent.setJestUczestnikiemErasmusa(true);
         } else {
             myStudent.setJestUczestnikiemErasmusa(false);

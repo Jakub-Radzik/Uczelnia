@@ -1,6 +1,6 @@
 package Klasy;
 
-public class Pracownik_Administracyjny extends Pracownik_Uczelni{
+public class Pracownik_Administracyjny extends Pracownik_Uczelni {
     private int liczba_nadgodzin;
 
     public Pracownik_Administracyjny() {

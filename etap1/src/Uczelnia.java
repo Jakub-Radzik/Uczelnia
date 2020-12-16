@@ -164,6 +164,7 @@ public class Uczelnia {
         System.out.println("[2] - dodać studenta");
         System.out.println("[3] - dodać pracownika administracji");
         System.out.println("[4] - dodać pracownika dydaktycznego");
+        System.out.println("[5] - Operacje wyświetlania");
         System.out.println("____________________________________");
     }
 
@@ -190,7 +191,7 @@ public class Uczelnia {
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
-            } while (wybor < 0 || wybor > 4);
+            } while (wybor < 0 || wybor > 5);
             switch (wybor) {
                 case 0 -> {
                     breakTheLoop = true;
@@ -315,12 +316,17 @@ public class Uczelnia {
                 case 3 -> {//Tworzenie pracownika administracji
                     uczelnia.setZapisObiektu(new ZapisObiektuPracownikAdministracji());
                     uczelnia.osoby.add((Pracownik_Administracyjny) uczelnia.zapisObiektu.saveObject());
+                    System.out.println("\nUTWORZONO NOWEGO PRACOWNIKA ADMINISTRACJI\n");
                     System.out.println(uczelnia.osoby.get(uczelnia.osoby.size() - 1));
                 }
                 case 4 -> {//Tworzenie pracownika dydaktycznego
                     uczelnia.setZapisObiektu(new ZapisObiektuPracownikDydaktyczny());
                     uczelnia.osoby.add((Pracownik_Badawczo_Dydaktyczny) uczelnia.zapisObiektu.saveObject());
+                    System.out.println("\nUTWORZONO NOWEGO PRACOWNIKA NAUKOWO DYDAKTYCZNEGO\n");
                     System.out.println(uczelnia.osoby.get(uczelnia.osoby.size() - 1));
+                }
+                case 5 -> {
+                    uczelnia.searchTool(uczelnia);
                 }
             }
 
@@ -332,7 +338,45 @@ public class Uczelnia {
         scanner.close();
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    public void searchTool(Uczelnia uczelnia){
+        Scanner scanner = new Scanner(System.in);
+        while(true){
+
+            System.out.println("\nWYBIERZ OPCJE WYSZUKIWANIA:");
+            System.out.println("[0] - WYJDŹ Z OPCJI WYSWIETLANIA");
+            System.out.println("[1] - wyświetl wszystkie osoby");
+            System.out.println("[2] - wyświetl wszystkie kursy");
+            System.out.println("[3] - wyświetl osoby po imieniu");
+            System.out.println("[4] - wyświetl osoby po nazwisku");
+            System.out.println();
+
+            switch(scanner.nextInt()){
+                default -> {
+                }
+                case 0 ->{
+                    return;
+                }
+                case 1 ->{
+                    uczelnia.osoby.forEach(System.out::println);
+                }
+                case 2 ->{
+                    uczelnia.kursy.forEach(System.out::println);
+                }
+                case 3 ->{
+                    scanner.nextLine();
+                    System.out.println("Wprowadz imię:");
+                    NarzedziaWyszukiwania.znajdzOsobyPoImieniu(uczelnia.osoby, scanner.nextLine()).forEach(System.out::println);
+                }
+                case 4 ->{
+                    scanner.nextLine();
+                    System.out.println("Wprowadz nazwisko:");
+                    NarzedziaWyszukiwania.znajdzOsobyPoNazwisku(uczelnia.osoby, scanner.nextLine()).forEach(System.out::println);
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args){
         Uczelnia uczelnia = new Uczelnia();
 //        uczelnia.realizacjap34();
         startInteraction(uczelnia);

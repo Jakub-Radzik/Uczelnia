@@ -1,8 +1,11 @@
 package Klasy;
 
+import java.io.Serial;
 import java.io.Serializable;
 
-public abstract class Osoba implements Serializable {
+public abstract class Osoba implements Serializable{
+    @Serial
+    private static final long serialVersionUID = 8483663180037803853L;
     private String imie;
     private String nazwisko;
     private String pesel;

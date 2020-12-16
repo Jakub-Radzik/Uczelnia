@@ -1,5 +1,7 @@
 package Klasy;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Student extends Osoba{
@@ -24,6 +26,7 @@ public class Student extends Osoba{
     }
 
     public Student() {
+        this.listaKursow = new ArrayList<>();
     }
 
 
@@ -58,6 +61,10 @@ public class Student extends Osoba{
 
     public void setListaKursow(List<Kurs> listaKursow) {
         this.listaKursow = listaKursow;
+    }
+
+    public void appendCourse(Kurs kurs){
+        this.listaKursow.add(kurs);
     }
 
     public boolean isJestUczestnikiemErasmusa() {
