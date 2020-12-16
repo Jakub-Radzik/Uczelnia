@@ -17,7 +17,7 @@ public abstract class AbstractCreator {
         }while((txt).chars().anyMatch(Character::isDigit)); //Sprawdzam czy istnieją cyfry bo może posiadać spacje które nie są literami
         return txt;
     }
-    protected static String checkStringHasOnlyNumbers(String description){
+    protected static String checkPESEL(String description){
         Scanner scanner = new Scanner(System.in);
         String txt;
         do{
@@ -26,6 +26,15 @@ public abstract class AbstractCreator {
         }while(!(txt).chars().allMatch(Character::isDigit) || txt.length()!=11);
         return txt;
     }
+//    protected static String checkStringHasOnlyNumbers(String description){
+//        Scanner scanner = new Scanner(System.in);
+//        String txt;
+//        do{
+//            System.out.println("Wprowadź "+description+":");
+//            txt = scanner.nextLine();
+//        }while(!(txt).chars().allMatch(Character::isDigit));
+//        return txt;
+//    }
     protected static int isIntegerAndCorrect(String description){
         Scanner scanner = new Scanner(System.in);
         int number = -1;
@@ -63,7 +72,7 @@ public abstract class AbstractCreator {
         Scanner scanner = new Scanner(System.in);
         person.setImie(checkStringHasOnlyLetters("imię"));
         person.setNazwisko(checkStringHasOnlyLetters("nazwisko"));
-        person.setPesel(checkStringHasOnlyNumbers("PESEL"));
+        person.setPesel(checkPESEL("PESEL"));
         person.setPlec(isGenderValid());
         person.setWiek(isIntegerAndCorrect("wiek"));
         return person;
@@ -75,9 +84,6 @@ public abstract class AbstractCreator {
         worker.setStanowisko(checkStringHasOnlyLetters("stanowisko"));
         worker.setStazPracy(isIntegerAndCorrect("staż pracy"));
         worker.setPensja(isIntegerAndCorrect("pensję"));
-
-//        System.out.println("Podaj pensje");
-//        worker.setPensja(scanner.nextInt());
         return worker;
     }
 
