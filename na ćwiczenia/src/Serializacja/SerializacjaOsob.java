@@ -9,9 +9,9 @@ public class SerializacjaOsob{
 
     //Poprzez użycie wyrażenie try-catch-with resources nie musimy się martwic o zamykanie strumieni
 
-    public static void serializacja(ArrayList<Osoba> osoby){
-        try(ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("Osoby.ser"));){
-            os.writeObject(osoby);
+    public static <T> void serializacja(ArrayList<T> list, String fileName){
+        try(ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(fileName));){
+            os.writeObject(list);
             System.out.println("Serializacja pomyślna");
         }catch (FileNotFoundException fex){
             System.out.println("FIle not found");
@@ -22,13 +22,13 @@ public class SerializacjaOsob{
         }
     }
 
-    public static void deserializacja(){
-        try(ObjectInputStream in = new ObjectInputStream(new FileInputStream("Osoby.ser"))){
-            ArrayList<Osoba> osoby = (ArrayList<Osoba>) in.readObject();
+    public static <T> void deserializacja(T type, String fileName){
+        try(ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName))){
+            ArrayList<T> list = (ArrayList<T>) in.readObject();
             System.out.println("DESERIALIZACJA");
-            for (Osoba osoba: osoby) {
+            for (T list_elem: list) {
                 System.out.println("=============================================================================================");
-                System.out.println(osoba.toString());
+                System.out.println(list_elem.toString());
                 System.out.println();
             }
         }catch (FileNotFoundException fex){

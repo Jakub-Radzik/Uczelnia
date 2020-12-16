@@ -14,8 +14,7 @@ public class ZapisObiektuKurs implements ZapisObiektu {
         System.out.println("Wprowadz nazwe kursu:");
         myKurs.setNazwaKursu(kursScanner.nextLine());
 
-        System.out.println("Wprowadz ilość punktów ECTS:");
-        myKurs.setEcts(kursScanner.nextInt());
+        myKurs.setEcts(AbstractCreator.isIntegerAndCorrect("liczbę punktów ECTS"));
 
         return myKurs;
     }

@@ -1,8 +1,12 @@
 package Klasy;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public class Kurs implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 5977260234174409131L;
     private String nazwaKursu;
     private Pracownik_Badawczo_Dydaktyczny prowadzacy;
     private int ects;
