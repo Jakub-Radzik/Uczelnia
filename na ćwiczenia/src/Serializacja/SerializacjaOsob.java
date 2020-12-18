@@ -1,7 +1,5 @@
 package Serializacja;
 
-import Klasy.Osoba;
-
 import java.io.*;
 import java.util.ArrayList;
 
@@ -22,15 +20,10 @@ public class SerializacjaOsob{
         }
     }
 
-    public static <T> void deserializacja(T type, String fileName){
+    public static <T> ArrayList<T> deserializacja(ArrayList<T> t, String fileName){
         try(ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName))){
-            ArrayList<T> list = (ArrayList<T>) in.readObject();
             System.out.println("DESERIALIZACJA");
-            for (T list_elem: list) {
-                System.out.println("=============================================================================================");
-                System.out.println(list_elem.toString());
-                System.out.println();
-            }
+            return (ArrayList<T>) in.readObject();
         }catch (FileNotFoundException fex){
             System.out.println("NO file");
             fex.printStackTrace();
@@ -38,6 +31,6 @@ public class SerializacjaOsob{
             System.out.println("Inny problem");
             ex.printStackTrace();
         }
-
+        return null;
     }
 }

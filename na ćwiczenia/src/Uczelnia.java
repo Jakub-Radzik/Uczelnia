@@ -555,13 +555,21 @@ public class Uczelnia {
                     SerializacjaOsob.serializacja(uczelnia.osoby, "Osoby.ser");
                 }
                 case 2 ->{
-                    SerializacjaOsob.deserializacja(Osoba.class,"Osoby.ser");
+                    if(SerializacjaOsob.deserializacja(uczelnia.osoby,"Osoby.ser")!=null){
+                        uczelnia.osoby = SerializacjaOsob.deserializacja(uczelnia.osoby,"Osoby.ser");
+                    }else{
+                        System.out.println("Wystąpił problem w czasie odczytu osób");
+                    }
                 }
                 case 3 ->{
                     SerializacjaOsob.serializacja(uczelnia.kursy, "Kursy.ser");
                 }
                 case 4 ->{
-                    SerializacjaOsob.deserializacja(Kurs.class, "Kursy.ser");
+                    if(SerializacjaOsob.deserializacja(uczelnia.kursy,"Kursy.ser")!=null){
+                        uczelnia.kursy = SerializacjaOsob.deserializacja(uczelnia.kursy,"Kursy.ser");
+                    }else{
+                        System.out.println("Wystąpił problem w czasie odczytu kursów");
+                    }
                 }
             }
         }
