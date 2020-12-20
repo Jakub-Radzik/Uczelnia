@@ -22,7 +22,7 @@ public class SerializacjaOsob{
 
     public static <T> ArrayList<T> deserializacja(ArrayList<T> t, String fileName){
         try(ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName))){
-            System.out.println("DESERIALIZACJA");
+            System.out.println("Deserializacja pomyślna");
             return (ArrayList<T>) in.readObject();
         }catch (FileNotFoundException fex){
             System.out.println("NO file");

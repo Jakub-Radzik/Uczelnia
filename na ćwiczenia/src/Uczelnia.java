@@ -4,6 +4,7 @@ import Serializacja.SerializacjaOsob;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public class Uczelnia {
     //STRATEGY DESIGN PATTER FOR ADDITION Students, Courses, Workers
@@ -68,7 +69,7 @@ public class Uczelnia {
 
         kursy = new ArrayList<>(Arrays.asList(analiza1, logika, algebra, fizyka1, termodynamika, wychowanieFizyczne, ProgramowanieStrukturalneIObiektrowe));
         osoby = new ArrayList<>(Arrays.asList(Szymon_Romanek, Rafal_Kruszyna, Piotr_Puchala, Jakub_Roszkowski, Natalia_Martynenko, Kamil_Herbetko, Malina_Lobocka, Mateusz_Pietrych, Wiktor_Sadowy, Jakub_Oleszczuk));
-
+        createComparators();
     }
 
     public void realizacjap34() {
@@ -167,10 +168,11 @@ public class Uczelnia {
         System.out.println("[4] - dodać pracownika dydaktycznego");
         System.out.println("[5] - Operacje wyświetlania");
         System.out.println("[6] - Operacje serializacji");
+        System.out.println("[7] - Operacje sortowania");
         System.out.println("____________________________________");
     }
 
-    public static void startInteraction(Uczelnia uczelnia) {
+    public static void startInteraction(Uczelnia uczelnia) throws InterruptedException {
         Scanner scanner = new Scanner(System.in);
         boolean breakTheLoop = false;
         while(true){
@@ -193,7 +195,7 @@ public class Uczelnia {
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
-            } while (wybor < 0 || wybor > 6);
+            } while (wybor < 0 || wybor > 7);
             switch (wybor) {
                 case 0 -> {
                     breakTheLoop = true;
@@ -336,6 +338,9 @@ public class Uczelnia {
                 }
                 case 6 ->{
                     uczelnia.serialTool(uczelnia);
+                }
+                case 7 ->{
+                    uczelnia.sortTool(uczelnia);
                 }
             }
 
@@ -539,12 +544,12 @@ public class Uczelnia {
         Scanner scanner = new Scanner(System.in);
         while(true){
 
-            System.out.println("\nWYBIERZ OPCJE WYSZUKIWANIA:");
+            System.out.println("\nWYBIERZ OPCJE SERIALIZACJI:");
             System.out.println("[0] - WYJDŹ Z OPCJI SERIALIZACJI");
             System.out.println("[1] - serializuj osoby");
-            System.out.println("[2] - wyświetl osoby z pliku po deserializacji");
+            System.out.println("[2] - wczytaj osoby");
             System.out.println("[3] - serializuj kursy");
-            System.out.println("[4] - wyświetl kursy z pliku po deserializacji");
+            System.out.println("[4] - wczytaj kursy");
             System.out.println();
 
             switch(scanner.nextInt()){
@@ -575,9 +580,227 @@ public class Uczelnia {
         }
     }
 
+    public void sortTool(Uczelnia uczelnia) throws InterruptedException {
+        Scanner scanner = new Scanner(System.in);
+        while(true){
+
+            System.out.println("\nWYBIERZ OPCJE SORTOWANIA:");
+            System.out.println("[0] - WYJDŹ Z OPCJI SORTOWANIA");
+            System.out.println("[1] - sortuj osoby po imieniu");
+            System.out.println("[2] - sortuj osoby po nazwisku");
+            System.out.println("[3] - sortuj osoby po nazwisku i imieniu");
+            System.out.println("[4] - sortuj osoby po wieku");
+            System.out.println("[5] - sortuj pracowników po zarobkach");
+            System.out.println("[6] - sortuj pracowników po stażu pracy");
+            System.out.println("[7] - sortuj po nazwach kursów dla wybranego studenta po indeksie\n");
+
+            switch(scanner.nextInt()){
+                case 0 ->{
+                    return;
+                }
+                case 1 ->{
+                    Collections.sort(uczelnia.osoby, uczelnia.getComparatorImie());
+                    sortToolConfirmSortAndDisplayOsoby(uczelnia.osoby);
+                }
+                case 2 ->{
+                    Collections.sort(uczelnia.osoby, uczelnia.getComparatorNazwisko());
+                    sortToolConfirmSortAndDisplayOsoby(uczelnia.osoby);
+                }
+                case 3 ->{
+                    Collections.sort(uczelnia.osoby, uczelnia.getComparatorNazwiskoImie());
+                    sortToolConfirmSortAndDisplayOsoby(uczelnia.osoby);
+                }
+                case 4 ->{
+                    Collections.sort(uczelnia.osoby, uczelnia.getComparatorWiek());
+                    sortToolConfirmSortAndDisplayOsoby(uczelnia.osoby);
+                }
+                case 5 ->{
+                    ArrayList<Pracownik_Uczelni> pracownicy = generateWorkersArray(uczelnia.osoby);
+                    pracownicy.sort(ComparatorPensja);
+                    pracownicy.forEach(System.out::println);
+                }
+                case 6 ->{
+                    ArrayList<Pracownik_Uczelni> pracownicy = generateWorkersArray(uczelnia.osoby);
+                    pracownicy.sort(ComparatorStaz);
+                    pracownicy.forEach(System.out::println);
+                }
+                case 7 ->{
+                    scanner.nextLine();
+                    System.out.println("Wprowadź indeks studenta:");
+                    String index = scanner.nextLine();
+                    Student student = NarzedziaWyszukiwania.znajdzStudentaPoIndeksie(uczelnia.osoby, index);
+                    if(student==null){
+                        System.out.println("NIE ZNALEZIONO STUDENTA");
+                    }else{
+                        student.getListaKursow().sort(ComparatorKursy);
+                        System.out.println(student);
+                    }
+                }
+            }
+
+
+
+        }
+    }
+
+    private void sortToolConfirmSortAndDisplayOsoby(ArrayList<Osoba> lista) throws InterruptedException {
+        System.out.println("KOLECKCJA ZOSTALA POSORTOWANA\n");
+        System.out.println("WYGLĄD FRAGMENTU KOLEKCJI PO SORTOWANIU:\n");
+        if(lista.size()<5){
+            lista.forEach(System.out::println);
+        }else{
+            int counter = 0;{
+                while (counter!=5){
+                    System.out.println(lista.get(counter).getImie()+" "+lista.get(counter).getNazwisko()+" "+lista.get(counter).getWiek());
+                    counter++;
+                }
+            }
+        }
+        Thread.sleep(500);
+        System.out.println("\n");
+    }
+    private ArrayList<Pracownik_Uczelni> generateWorkersArray(ArrayList<Osoba> lista){
+        ArrayList<Pracownik_Uczelni> pracownicy = new ArrayList<Pracownik_Uczelni>();
+        for (Osoba osoba: lista) {
+            if(osoba instanceof Pracownik_Uczelni){
+                pracownicy.add((Pracownik_Uczelni) osoba);
+            }
+        }
+        return pracownicy;
+    }
+
+
+    //COMPARATORS SECTION===========================================================
+    private OsobaCompareImie ComparatorImie;
+    private OsobaCompareNazwisko ComparatorNazwisko;
+    private OsobaCompareNazwiskoImie ComparatorNazwiskoImie;
+    private OsobaCompareWiek ComparatorWiek;
+    private PracownikComparePensja ComparatorPensja;
+    private PracownikCompareStaz ComparatorStaz;
+    private StudentCompareKursy ComparatorKursy;
+
+    public StudentCompareKursy getComparatorKursy() {
+        return ComparatorKursy;
+    }
+
+    public void setComparatorKursy(StudentCompareKursy comparatorKursy) {
+        ComparatorKursy = comparatorKursy;
+    }
+
+    public OsobaCompareImie getComparatorImie() {
+        return ComparatorImie;
+    }
+
+    public void setComparatorImie(OsobaCompareImie comparatorImie) {
+        ComparatorImie = comparatorImie;
+    }
+
+    public OsobaCompareNazwisko getComparatorNazwisko() {
+        return ComparatorNazwisko;
+    }
+
+    public void setComparatorNazwisko(OsobaCompareNazwisko comparatorNazwisko) {
+        ComparatorNazwisko = comparatorNazwisko;
+    }
+
+    public OsobaCompareNazwiskoImie getComparatorNazwiskoImie() {
+        return ComparatorNazwiskoImie;
+    }
+
+    public void setComparatorNazwiskoImie(OsobaCompareNazwiskoImie comparatorNazwiskoImie) {
+        ComparatorNazwiskoImie = comparatorNazwiskoImie;
+    }
+
+    public OsobaCompareWiek getComparatorWiek() {
+        return ComparatorWiek;
+    }
+
+    public void setComparatorWiek(OsobaCompareWiek comparatorWiek) {
+        ComparatorWiek = comparatorWiek;
+    }
+
+    public PracownikComparePensja getComparatorPensja() {
+        return ComparatorPensja;
+    }
+
+    public void setComparatorPensja(PracownikComparePensja comparatorPensja) {
+        ComparatorPensja = comparatorPensja;
+    }
+
+    public PracownikCompareStaz getComparatorStaz() {
+        return ComparatorStaz;
+    }
+
+    public void setComparatorStaz(PracownikCompareStaz comparatorStaz) {
+        ComparatorStaz = comparatorStaz;
+    }
+
+    private void createComparators(){
+        ComparatorImie= new OsobaCompareImie();
+        ComparatorNazwisko = new OsobaCompareNazwisko();
+        ComparatorNazwiskoImie = new OsobaCompareNazwiskoImie();
+        ComparatorWiek = new OsobaCompareWiek();
+        ComparatorPensja= new PracownikComparePensja();
+        ComparatorStaz = new PracownikCompareStaz();
+        ComparatorKursy = new StudentCompareKursy();
+    }
+
+    class OsobaCompareImie implements Comparator<Osoba>{
+        @Override
+        public int compare(Osoba o1, Osoba o2) {
+            return o1.getImie().compareTo(o2.getImie());
+        }
+    }
+    class OsobaCompareNazwisko implements Comparator<Osoba>{
+        @Override
+        public int compare(Osoba o1, Osoba o2) {
+            return o1.getNazwisko().compareTo(o2.getNazwisko());
+        }
+    }
+    class OsobaCompareNazwiskoImie implements Comparator<Osoba>{
+        @Override
+        public int compare(Osoba o1, Osoba o2) {
+            String p1 = o1.getNazwisko()+" "+o1.getImie();
+            String p2 = o2.getNazwisko()+" "+o2.getImie();
+            return p1.compareTo(p2);
+        }
+    }
+    class OsobaCompareWiek implements Comparator<Osoba>{
+        @Override
+        public int compare(Osoba o1, Osoba o2) {
+            return Integer.compare(o1.getWiek(), o2.getWiek());
+        }
+    }
+    class PracownikComparePensja implements Comparator<Pracownik_Uczelni>{
+        @Override
+        public int compare(Pracownik_Uczelni o1, Pracownik_Uczelni o2) {
+            return Double.compare(o1.getPensja(), o2.getPensja());
+        }
+    }
+    class PracownikCompareStaz implements Comparator<Pracownik_Uczelni>{
+        @Override
+        public int compare(Pracownik_Uczelni o1, Pracownik_Uczelni o2) {
+            return Integer.compare(o1.getStazPracy(), o2.getStazPracy());
+        }
+    }
+    class StudentCompareKursy implements Comparator<Kurs>{
+        @Override
+        public int compare(Kurs o1, Kurs o2) {
+            return o1.getNazwaKursu().compareTo(o2.getNazwaKursu());
+        }
+    }
+
+
+
     public static void main(String[] args){
         Uczelnia uczelnia = new Uczelnia();
-        startInteraction(uczelnia);
+        try {
+            startInteraction(uczelnia);
+        }catch (InterruptedException ie){
+            ie.printStackTrace();
+        }
+
+
     }
 }
 

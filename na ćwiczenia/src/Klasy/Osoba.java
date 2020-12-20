@@ -2,9 +2,9 @@ package Klasy;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Comparator;
 
 public abstract class Osoba implements Serializable{
-
     @Serial
     private static final long serialVersionUID = 8483663180037803853L;
     private String imie;
@@ -72,4 +72,5 @@ public abstract class Osoba implements Serializable{
                 ", wiek=" + wiek +
                 ", plec='" + plec + "' \n";
     }
+
 }
