@@ -29,8 +29,6 @@ public class Student extends Osoba{
         this.listaKursow = new ArrayList<>();
     }
 
-
-
     public String getKierunek() {
         return kierunek;
     }

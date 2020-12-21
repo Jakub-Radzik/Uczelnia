@@ -1,75 +1,18 @@
 import InterakcjaKonsola.*;
 import Klasy.*;
 import Serializacja.SerializacjaOsob;
+import Sortowanie.NarzedziaSortowania;
+import Struktury.Listy;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 
 public class Uczelnia {
     //STRATEGY DESIGN PATTER FOR ADDITION Students, Courses, Workers
     ZapisObiektu zapisObiektu;
-
-    private ArrayList<Osoba> osoby;
-    private ArrayList<Kurs> kursy;
-    private Pracownik_Badawczo_Dydaktyczny Szymon_Romanek;
-    private Pracownik_Badawczo_Dydaktyczny Piotr_Puchala;
-    private Pracownik_Badawczo_Dydaktyczny Rafal_Kruszyna;
-    private Pracownik_Badawczo_Dydaktyczny Jakub_Roszkowski;
-    private Pracownik_Administracyjny Natalia_Martynenko;
-    private Pracownik_Administracyjny Kamil_Herbetko;
-    private Pracownik_Administracyjny Malina_Lobocka;
-    private Kurs analiza1;
-    private Kurs logika;
-    private Kurs algebra;
-    private Kurs fizyka1;
-    private Kurs termodynamika;
-    private Kurs wychowanieFizyczne;
-    private Kurs ProgramowanieStrukturalneIObiektrowe;
-    private ArrayList<Kurs> matematyka;
-    private ArrayList<Kurs> fizyka;
-    private ArrayList<Kurs> informatyka;
-    private Student Mateusz_Pietrych;
-    private Student Wiktor_Sadowy;
-    private Student Jakub_Oleszczuk;
-
-    public ArrayList<Osoba> getOsoby() {
-        return osoby;
-    }
-
-    public ArrayList<Kurs> getKursy() {
-        return kursy;
-    }
-
     public Uczelnia() {
-        Szymon_Romanek = new Pracownik_Badawczo_Dydaktyczny("Szymon", "Romanek", "000000000000", 30, "M", "Wykladowca", 5, 3000, 5);
-        Piotr_Puchala = new Pracownik_Badawczo_Dydaktyczny("Piotr", "Puchala", "11111111111", 35, "M", "Profesor Nadzwyczajny", 15, 15000, 22);
-        Rafal_Kruszyna = new Pracownik_Badawczo_Dydaktyczny("Rafal", "Kruszyna", "22222222222", 25, "M", "Adiunkt", 5, 5500, 10);
-        Jakub_Roszkowski = new Pracownik_Badawczo_Dydaktyczny("Jakub", "Roszkowski", "99999999999", 35, "M", "Profesor Nadzwyczajny", 20, 16000, 30);
-
-        Natalia_Martynenko = new Pracownik_Administracyjny("Natalia", "Martynenko", "33333333333", 28, "K", "Starszy Specjalista", 10, 8500, 12);
-        Kamil_Herbetko = new Pracownik_Administracyjny("Kamil", "Herbetko", "44444444444", 29, "M", "Referent", 10, 9500, 6);
-        Malina_Lobocka = new Pracownik_Administracyjny("Malina", "Lobocka", "55555555555", 32, "K", "Specjalista", 5, 11500, 10);
-
-        analiza1 = new Kurs("Analiza Matematyczna 1", Szymon_Romanek, 5);
-        logika = new Kurs("Logika", Rafal_Kruszyna, 4);
-        algebra = new Kurs("Algebra", Piotr_Puchala, 6);
-        fizyka1 = new Kurs("Fizyka 1", Szymon_Romanek, 4);
-        termodynamika = new Kurs("Termodynamika", Piotr_Puchala, 5);
-        wychowanieFizyczne = new Kurs("Wychowanie Fizyczne", Rafal_Kruszyna, 0);
-        ProgramowanieStrukturalneIObiektrowe = new Kurs("Programowanie Strukturalne i Obiektowe", Jakub_Roszkowski, 7);
-
-        matematyka = new ArrayList<>(Arrays.asList(analiza1, algebra));
-        fizyka = new ArrayList<>(Arrays.asList(fizyka1, termodynamika, wychowanieFizyczne, analiza1));
-        informatyka = new ArrayList<>(Arrays.asList(fizyka1, logika, wychowanieFizyczne, analiza1, ProgramowanieStrukturalneIObiektrowe));
-
-        Mateusz_Pietrych = new Student("Mateusz", "Pietrych", "66666666666", 19, "M", "123456", matematyka, false, true, true, 1, "Matematyka Stosowana");
-        Wiktor_Sadowy = new Student("Wiktor", "Sadowy", "77777777777", 20, "M", "123654", fizyka, false, true, true, 2, "Fizyka Jądrowa");
-        Jakub_Oleszczuk = new Student("Jakub", "Oleszczuk", "88888888888", 21, "M", "123777", informatyka, false, false, true, 3, "Informatyka Stosowana");
-
-        kursy = new ArrayList<>(Arrays.asList(analiza1, logika, algebra, fizyka1, termodynamika, wychowanieFizyczne, ProgramowanieStrukturalneIObiektrowe));
-        osoby = new ArrayList<>(Arrays.asList(Szymon_Romanek, Rafal_Kruszyna, Piotr_Puchala, Jakub_Roszkowski, Natalia_Martynenko, Kamil_Herbetko, Malina_Lobocka, Mateusz_Pietrych, Wiktor_Sadowy, Jakub_Oleszczuk));
-        createComparators();
+        new Listy();
+        new NarzedziaSortowania();
     }
 
     public void realizacjap34() {
@@ -78,58 +21,58 @@ public class Uczelnia {
         System.out.println("REALIZACJA PUNKTU 3\n");
 
         System.out.println("\nWyszukiwanie osob po imieniu (Piotr) ============================================================================\n");
-        NarzedziaWyszukiwania.znajdzOsobyPoImieniu(osoby, "Piotr").forEach(System.out::println);
+        NarzedziaWyszukiwania.znajdzOsobyPoImieniu(Listy.osoby, "Piotr").forEach(System.out::println);
 
         System.out.println("\nWyszukiwanie osob po nazwisku (Oleszczuk) ============================================================================\n");
-        NarzedziaWyszukiwania.znajdzOsobyPoNazwisku(osoby, "Oleszczuk").forEach(System.out::println);
+        NarzedziaWyszukiwania.znajdzOsobyPoNazwisku(Listy.osoby, "Oleszczuk").forEach(System.out::println);
 
         System.out.println("\nWyszukiwanie osob po stazu pracy mniejszym niz 10============================================================================\n");
-        NarzedziaWyszukiwania.znajdzPracownikowPoStazuPracyMniejszymNiz(osoby, 10).forEach(System.out::println);
+        NarzedziaWyszukiwania.znajdzPracownikowPoStazuPracyMniejszymNiz(Listy.osoby, 10).forEach(System.out::println);
 
         System.out.println("\nWyszukiwanie osob po stazu pracy większym niz 10============================================================================\n");
-        NarzedziaWyszukiwania.znajdzPracownikowPoStazuPracyWiekszymNiz(osoby, 10).forEach(System.out::println);
+        NarzedziaWyszukiwania.znajdzPracownikowPoStazuPracyWiekszymNiz(Listy.osoby, 10).forEach(System.out::println);
 
         System.out.println("\nWyszukiwanie osob po stazu pracy równym 5============================================================================\n");
-        NarzedziaWyszukiwania.znajdzPracownikowPoStazuPracyRownym(osoby, 5).forEach(System.out::println);
+        NarzedziaWyszukiwania.znajdzPracownikowPoStazuPracyRownym(Listy.osoby, 5).forEach(System.out::println);
 
         System.out.println("\nWyszukiwanie osob po liczbie nadgodzin mniejszej niz 6 ============================================================================\n");
-        NarzedziaWyszukiwania.znajdzPracownikowPoNadgodzinachMniejszychNiz(osoby, 6).forEach(System.out::println);
+        NarzedziaWyszukiwania.znajdzPracownikowPoNadgodzinachMniejszychNiz(Listy.osoby, 6).forEach(System.out::println);
 
         System.out.println("\nWyszukiwanie osob po liczbie nadgodzin wiekszej niz 6 ============================================================================\n");
-        NarzedziaWyszukiwania.znajdzPracownikowPoNadgodzinachWiekszychNiz(osoby, 6).forEach(System.out::println);
+        NarzedziaWyszukiwania.znajdzPracownikowPoNadgodzinachWiekszychNiz(Listy.osoby, 6).forEach(System.out::println);
 
         System.out.println("\nWyszukiwanie osob po liczbie nadgodzin równej 6 ============================================================================\n");
-        NarzedziaWyszukiwania.znajdzPracownikowPoNadgodzinachRownych(osoby, 6).forEach(System.out::println);
+        NarzedziaWyszukiwania.znajdzPracownikowPoNadgodzinachRownych(Listy.osoby, 6).forEach(System.out::println);
 
         System.out.println("\nWyszukiwanie osob po pensji wiekszej niz 15000 ============================================================================\n");
-        NarzedziaWyszukiwania.znajdzPracownikowPoPensjiWiekszejNiz(osoby, 15000).forEach(System.out::println);
+        NarzedziaWyszukiwania.znajdzPracownikowPoPensjiWiekszejNiz(Listy.osoby, 15000).forEach(System.out::println);
 
         System.out.println("\nWyszukiwanie osob po pensji mniejszej niz 15000 ============================================================================\n");
-        NarzedziaWyszukiwania.znajdzPracownikowPoPensjiMniejszejNiz(osoby, 15000).forEach(System.out::println);
+        NarzedziaWyszukiwania.znajdzPracownikowPoPensjiMniejszejNiz(Listy.osoby, 15000).forEach(System.out::println);
 
         System.out.println("\nWyszukiwanie osob po pensji rownej 15000 ============================================================================\n");
-        NarzedziaWyszukiwania.znajdzPracownikowPoPensjiRownej(osoby, 15000).forEach(System.out::println);
+        NarzedziaWyszukiwania.znajdzPracownikowPoPensjiRownej(Listy.osoby, 15000).forEach(System.out::println);
 
         System.out.println("\nWyszukiwanie osob po stanowisku (Adiunkt) ============================================================================\n");
-        NarzedziaWyszukiwania.znajdzPracownikowPoStanowisku(osoby, "Adiunkt").forEach(System.out::println);
+        NarzedziaWyszukiwania.znajdzPracownikowPoStanowisku(Listy.osoby, "Adiunkt").forEach(System.out::println);
 
         System.out.println("\nWyszukiwanie studenta po numerze indeksu (123456) ============================================================================\n");
-        System.out.println(NarzedziaWyszukiwania.znajdzStudentaPoIndeksie(osoby, "123456"));
+        System.out.println(NarzedziaWyszukiwania.znajdzStudentaPoIndeksie(Listy.osoby, "123456"));
 
         System.out.println("\nWyszukiwanie studentów po roku studiów (1) ============================================================================\n");
-        NarzedziaWyszukiwania.znajdzStudentowPoRokuStudiow(osoby, 1).forEach(System.out::println);
+        NarzedziaWyszukiwania.znajdzStudentowPoRokuStudiow(Listy.osoby, 1).forEach(System.out::println);
 
         System.out.println("\nWyszukiwanie studentów po kierunku (Informatyka Stosowana) ============================================================================\n");
-        NarzedziaWyszukiwania.znajdzStudentowPoKierunku(osoby, "Informatyka Stosowana").forEach(System.out::println);
+        NarzedziaWyszukiwania.znajdzStudentowPoKierunku(Listy.osoby, "Informatyka Stosowana").forEach(System.out::println);
 
         System.out.println("\nWyszukiwanie kursu po nazwie (Analiza Matematyczna 1) ============================================================================\n");
-        System.out.println(NarzedziaWyszukiwania.znajdzKursPoNazwie(kursy, "Analiza Matematyczna 1"));
+        System.out.println(NarzedziaWyszukiwania.znajdzKursPoNazwie(Listy.kursy, "Analiza Matematyczna 1"));
 
         System.out.println("\nWyszukiwanie kursów po liczbie ects (5) ============================================================================\n");
-        NarzedziaWyszukiwania.znajdzKursyPoECTS(kursy, 5).forEach(System.out::println);
+        NarzedziaWyszukiwania.znajdzKursyPoECTS(Listy.kursy, 5).forEach(System.out::println);
 
-        System.out.println("\nWyszukiwanie kursów po prowadzacym (Rafał Kruszyna) ============================================================================\n");
-        NarzedziaWyszukiwania.znajdzKursyPoProwadzacym(kursy, Rafal_Kruszyna).forEach(System.out::println);
+        System.out.println("\nWyszukiwanie kursów po prowadzacym+"+Listy.osoby.get(0).getImie()+" "+Listy.osoby.get(0).getNazwisko()+" ============================================================================\n");
+        NarzedziaWyszukiwania.znajdzKursyPoProwadzacym(Listy.kursy, Listy.osoby.get(0)).forEach(System.out::println);
 
 
         //REALIZACJA PUNKTU 4
@@ -137,12 +80,12 @@ public class Uczelnia {
         System.out.println("REALIZACJA PUNKTU 4");
         System.out.println("=====================================================================================================================\n");
         System.out.println("Kursy:\n");
-        for (Kurs kurs : kursy) {
+        for (Kurs kurs : Listy.kursy) {
             System.out.println(kurs.toString());
         }
 
         System.out.println("\nOsoby:\n");
-        for (Osoba osoba : osoby) {
+        for (Osoba osoba : Listy.osoby) {
             System.out.println("OSOBA====================================================================================================");
             System.out.println(osoba.toString());
             System.out.println();
@@ -175,7 +118,7 @@ public class Uczelnia {
     public static void startInteraction(Uczelnia uczelnia) throws InterruptedException {
         Scanner scanner = new Scanner(System.in);
         boolean breakTheLoop = false;
-        while(true){
+        while (true) {
             // Rozpoczynamy interakcje w menu
             // wybor przechowuje oznaczenie wyboru operacji
             int wybor = 0;
@@ -203,148 +146,49 @@ public class Uczelnia {
                 case 1 -> { // tworzenie nowego kursu
                     //Zmiana strategii i zapisanie kursu do tablicy z kursami
                     uczelnia.setZapisObiektu(new ZapisObiektuKurs());
-                    uczelnia.kursy.add((Kurs) uczelnia.zapisObiektu.saveObject());
-
-                    //W związku z kłopotami z odczytem listy pracowników, operacja wyboru prowadzącego jest wykonywana tutaj
-                    //prezentacja wyboru pracownika dydaktycznego
-                    //AtomicInteger potrzebny gdyż z każdym wyswietleniem osoby inkrementuję i zwracam numer
-                    AtomicInteger c = new AtomicInteger();
-                    System.out.println("[0] - Utwórz nowego prowadzącego");
-                    uczelnia.osoby.stream()
-                            .filter(osoba -> osoba instanceof Pracownik_Badawczo_Dydaktyczny)
-                            .forEach(osoba -> System.out.println("[" + (c.incrementAndGet()) + "] - " + osoba.getImie() + " " + osoba.getNazwisko()));
-
-                    // poprawny jest wybor całkowity od 0 do ilosci prowadzacych
-                    // -1 nie jest poprawne i w tym przypadku znowu obslugujemy błędy wejścia
-                    wybor = -1;
-                    do {
-                        System.out.println("Wybierz prowadzacego:");
-                        try {
-                            wybor = scanner.nextInt();
-                        } catch (InputMismatchException ex) {
-                            scanner.next();
-                        }
-
-                    } while (wybor < 0 || wybor > c.get());
-
-                    //Użytkownik może wybrać utworzenie prowadzącego zamiast przypisanie istniejącego
-                    if (wybor == 0) { //Utworzono nowy kurs i tworzymy nowego prowadzącego dla tego kursu
-                        uczelnia.setZapisObiektu(new ZapisObiektuPracownikDydaktyczny());       //Przełączenie strategii na utworzenie nowego pracownika dydaktycznego
-                        uczelnia.osoby.add((Pracownik_Badawczo_Dydaktyczny) uczelnia.zapisObiektu.saveObject());    //Po utworzeniu pracownika zapisanie go na koncu tablicy osob
-                        System.out.println("NOWY PROWADZĄCY:============================================");
-                        System.out.println(uczelnia.osoby.get(uczelnia.osoby.size() - 1));    //Nowy prowadzący jest na koncu
-                        System.out.println("NOWY KURS:==================================================");
-                        uczelnia.kursy.get(uczelnia.kursy.size() - 1).setProwadzacy((Pracownik_Badawczo_Dydaktyczny) uczelnia.osoby.get(uczelnia.osoby.size() - 1));
-                        //nowy utworzony kurs jest na koncu tablicy kursów - bierzemy go i przypisujemy mu ostatniego pracownika z zapisanych czyli nowego pracownika
-
-                    } else { // przypisanie istniejącego prowadzącego
-                        c.set(0);
-                        for (Osoba osoba : uczelnia.osoby) {
-                            if (osoba instanceof Pracownik_Badawczo_Dydaktyczny) {
-                                c.incrementAndGet();
-                                if (c.get() == wybor) {
-                                    uczelnia.kursy.get(uczelnia.kursy.size() - 1).setProwadzacy((Pracownik_Badawczo_Dydaktyczny) osoba);
-                                }
-                            }
-                        }
-                    }
-                    System.out.println(uczelnia.kursy.get(uczelnia.kursy.size() - 1).toString());
+                    Kurs nowyKurs = (Kurs) uczelnia.zapisObiektu.saveObject();
+                    Listy.kursy.add(nowyKurs);
+                    System.out.println(nowyKurs.toString());
 
                 }
                 case 2 -> { //Tworzenie nowego studenta
                     //Przełączenie strategii i zapis do tablicy
                     uczelnia.setZapisObiektu(new ZapisObiektuStudent());
-                    Student myStudent = (Student) uczelnia.zapisObiektu.saveObject();
-//                    Student myStudent = new Student();      //tymczasowo
-                    //MENU WYBORU KURSÓW:
-
-                    AtomicInteger c = new AtomicInteger(0);
-
-                    ArrayList<Kurs> kursyDoWyboru = new ArrayList<Kurs>(uczelnia.kursy);
-
-                    System.out.println("\nDomyślnie student został zapisany na analizę 1 i algebrę\n");
-                    myStudent.appendCourse(uczelnia.algebra);
-                    myStudent.appendCourse(uczelnia.analiza1);
-
-                    while (true){
-                        c.set(0);
-                        if(myStudent.getListaKursow()!=null){
-                            kursyDoWyboru.removeAll(myStudent.getListaKursow());
-                        }
-
-
-                        System.out.println("WYBIERZ KURS DO PRZYPISANIA STUDENTOWI:");
-                        System.out.println("[0] - ZAKONCZ");
-                        kursyDoWyboru.forEach(kurs -> System.out.println("["+c.incrementAndGet()+"] - "+kurs.getNazwaKursu()));
-
-                        wybor = -1;
-                        do {
-                            System.out.println("Wybierz kurs do przypisania:");
-                            try {
-                                wybor = scanner.nextInt();
-                            } catch (InputMismatchException ex) {
-                                scanner.next();
-                            }
-
-                        } while (wybor < 0 || wybor > kursyDoWyboru.size());
-
-                        if(wybor!=0){
-                            myStudent.appendCourse(kursyDoWyboru.get(wybor-1));
-                        }else{
-                            break;
-                        }
-                    }
-
-                    //Tworzymy tablice z istniejącymi indeksami
-                    ArrayList<String> indeksy = new ArrayList<>();
-                    for (Osoba osoba : uczelnia.osoby) {
-                        if (osoba instanceof Student) {
-                            indeksy.add(((Student) osoba).getNumer_indeksu());
-                        }
-                    }
-
-                    //Dopoki nowy indeks nie jest unikalny generujemy nowy
-                    while (true) {
-                        String newIndeks = String.valueOf(new Random().nextInt(999999999));
-                        if (!indeksy.contains(newIndeks)) {
-                            myStudent.setNumer_indeksu(newIndeks);
-                            break;
-                        }
-                    }
-                    uczelnia.osoby.add(myStudent);
+                    Student nowyStudent = (Student) uczelnia.zapisObiektu.saveObject();
+                    Listy.osoby.add(nowyStudent);
                     System.out.println("\nUTWORZONO NOWEGO STUDENTA:\n");
-                    System.out.println(uczelnia.osoby.get(uczelnia.osoby.size() - 1));
-
-
+                    System.out.println(nowyStudent);
                 }
                 case 3 -> {//Tworzenie pracownika administracji
                     uczelnia.setZapisObiektu(new ZapisObiektuPracownikAdministracji());
-                    uczelnia.osoby.add((Pracownik_Administracyjny) uczelnia.zapisObiektu.saveObject());
+                    Pracownik_Administracyjny nowyPracownik = (Pracownik_Administracyjny) uczelnia.zapisObiektu.saveObject();
+                    Listy.osoby.add(nowyPracownik);
                     System.out.println("\nUTWORZONO NOWEGO PRACOWNIKA ADMINISTRACJI\n");
-                    System.out.println(uczelnia.osoby.get(uczelnia.osoby.size() - 1));
+                    System.out.println(nowyPracownik);
                 }
                 case 4 -> {//Tworzenie pracownika dydaktycznego
                     uczelnia.setZapisObiektu(new ZapisObiektuPracownikDydaktyczny());
-                    uczelnia.osoby.add((Pracownik_Badawczo_Dydaktyczny) uczelnia.zapisObiektu.saveObject());
+                    Pracownik_Badawczo_Dydaktyczny nowyPracownik = (Pracownik_Badawczo_Dydaktyczny) uczelnia.zapisObiektu.saveObject();
+                    Listy.osoby.add(nowyPracownik);
                     System.out.println("\nUTWORZONO NOWEGO PRACOWNIKA NAUKOWO DYDAKTYCZNEGO\n");
-                    System.out.println(uczelnia.osoby.get(uczelnia.osoby.size() - 1));
+                    System.out.println(nowyPracownik);
                 }
                 case 5 -> {
                     try {
                         uczelnia.searchTool(uczelnia);
-                    }catch (Exception ex){
+                    } catch (Exception ex) {
                         System.out.println("Something wrong");
                     }
                 }
-                case 6 ->{
+                case 6 -> {
                     uczelnia.serialTool(uczelnia);
                 }
-                case 7 ->{
+                case 7 -> {
                     uczelnia.sortTool(uczelnia);
                 }
             }
 
-            if (breakTheLoop){
+            if (breakTheLoop) {
                 break;
             }
         }
@@ -354,7 +198,7 @@ public class Uczelnia {
 
     public void searchTool(Uczelnia uczelnia) throws InterruptedException {
         Scanner scanner = new Scanner(System.in);
-        while(true){
+        while (true) {
 
             System.out.println("\nWYBIERZ OPCJE WYSZUKIWANIA:");
             System.out.println("[0] - WYJDŹ Z OPCJI WYSWIETLANIA");
@@ -389,125 +233,126 @@ public class Uczelnia {
 
             System.out.println();
             System.out.println("WYBIERZ OPERACJE:");
-            switch(scanner.nextInt()){
-                case 0 ->{
+            switch (scanner.nextInt()) {
+                case 0 -> {
                     return;
                 }
-                case 1 ->{
-                    uczelnia.osoby.forEach(System.out::println);
+                case 1 -> {
+                    Listy.osoby.forEach(System.out::println);
                 }
-                case 2 ->{
-                    uczelnia.kursy.forEach(System.out::println);
+                case 2 -> {
+                    Listy.kursy.forEach(System.out::println);
                 }
                 case 3 -> {
-                    uczelnia.osoby.stream().filter(osoba -> osoba instanceof Student)
+                    Listy.osoby.stream().filter(osoba -> osoba instanceof Student)
                             .forEach(System.out::println);
                 }
-                case 4 ->{
-                    uczelnia.osoby.stream().filter(osoba -> osoba instanceof Pracownik_Uczelni)
+                case 4 -> {
+                    Listy.osoby.stream().filter(osoba -> osoba instanceof Pracownik_Uczelni)
                             .forEach(System.out::println);
                 }
-                case 5 ->{
-                    uczelnia.osoby.stream().filter(osoba -> osoba instanceof Pracownik_Administracyjny)
+                case 5 -> {
+                    Listy.osoby.stream().filter(osoba -> osoba instanceof Pracownik_Administracyjny)
                             .forEach(System.out::println);
                 }
-                case 6 ->{
-                    uczelnia.osoby.stream().filter(osoba -> osoba instanceof Pracownik_Badawczo_Dydaktyczny)
-                            .forEach(System.out::println);}
+                case 6 -> {
+                    Listy.osoby.stream().filter(osoba -> osoba instanceof Pracownik_Badawczo_Dydaktyczny)
+                            .forEach(System.out::println);
+                }
                 //IMIE
-                case 7 ->{
+                case 7 -> {
                     scanner.nextLine();
                     System.out.println("Wprowadz imię:");
-                    NarzedziaWyszukiwania.znajdzOsobyPoImieniu(uczelnia.osoby, scanner.nextLine()).forEach(System.out::println);
+                    NarzedziaWyszukiwania.znajdzOsobyPoImieniu(Listy.osoby, scanner.nextLine()).forEach(System.out::println);
                 }
                 //NAZWISKO
-                case 8 ->{
+                case 8 -> {
                     scanner.nextLine();
                     System.out.println("Wprowadz nazwisko:");
-                    NarzedziaWyszukiwania.znajdzOsobyPoNazwisku(uczelnia.osoby, scanner.nextLine()).forEach(System.out::println);
+                    NarzedziaWyszukiwania.znajdzOsobyPoNazwisku(Listy.osoby, scanner.nextLine()).forEach(System.out::println);
                 }
                 //STAŻ PRACY
-                case 9 ->{
+                case 9 -> {
                     System.out.println("Wprowadz staż pracy:");
-                    NarzedziaWyszukiwania.znajdzPracownikowPoStazuPracyWiekszymNiz(uczelnia.osoby, scanner.nextInt()).forEach(System.out::println);
+                    NarzedziaWyszukiwania.znajdzPracownikowPoStazuPracyWiekszymNiz(Listy.osoby, scanner.nextInt()).forEach(System.out::println);
                 }
-                case 10 ->{
+                case 10 -> {
                     System.out.println("Wprowadz staż pracy:");
-                    NarzedziaWyszukiwania.znajdzPracownikowPoStazuPracyRownym(uczelnia.osoby, scanner.nextInt()).forEach(System.out::println);
+                    NarzedziaWyszukiwania.znajdzPracownikowPoStazuPracyRownym(Listy.osoby, scanner.nextInt()).forEach(System.out::println);
                 }
-                case 11 ->{
+                case 11 -> {
                     System.out.println("Wprowadz staż pracy:");
-                    NarzedziaWyszukiwania.znajdzPracownikowPoStazuPracyMniejszymNiz(uczelnia.osoby, scanner.nextInt()).forEach(System.out::println);
+                    NarzedziaWyszukiwania.znajdzPracownikowPoStazuPracyMniejszymNiz(Listy.osoby, scanner.nextInt()).forEach(System.out::println);
                 }
                 //NADGODZINY
-                case 12 ->{
+                case 12 -> {
                     System.out.println("Wprowadz ilość nadgodzin:");
-                    NarzedziaWyszukiwania.znajdzPracownikowPoNadgodzinachMniejszychNiz(uczelnia.osoby, scanner.nextInt()).forEach(System.out::println);
+                    NarzedziaWyszukiwania.znajdzPracownikowPoNadgodzinachMniejszychNiz(Listy.osoby, scanner.nextInt()).forEach(System.out::println);
                 }
-                case 13 ->{
+                case 13 -> {
                     System.out.println("Wprowadz ilość nadgodzin:");
-                    NarzedziaWyszukiwania.znajdzPracownikowPoNadgodzinachRownych(uczelnia.osoby, scanner.nextInt()).forEach(System.out::println);
+                    NarzedziaWyszukiwania.znajdzPracownikowPoNadgodzinachRownych(Listy.osoby, scanner.nextInt()).forEach(System.out::println);
                 }
-                case 14 ->{
+                case 14 -> {
                     System.out.println("Wprowadz ilość nadgodzin:");
-                    NarzedziaWyszukiwania.znajdzPracownikowPoNadgodzinachWiekszychNiz(uczelnia.osoby, scanner.nextInt()).forEach(System.out::println);
+                    NarzedziaWyszukiwania.znajdzPracownikowPoNadgodzinachWiekszychNiz(Listy.osoby, scanner.nextInt()).forEach(System.out::println);
                 }
                 //PENSJA
-                case 15 ->{
+                case 15 -> {
                     System.out.println("Wprowadz pensję:");
-                    NarzedziaWyszukiwania.znajdzPracownikowPoPensjiMniejszejNiz(uczelnia.osoby, scanner.nextInt()).forEach(System.out::println);
+                    NarzedziaWyszukiwania.znajdzPracownikowPoPensjiMniejszejNiz(Listy.osoby, scanner.nextInt()).forEach(System.out::println);
                 }
-                case 16 ->{
+                case 16 -> {
                     System.out.println("Wprowadz pensję:");
-                    NarzedziaWyszukiwania.znajdzPracownikowPoPensjiRownej(uczelnia.osoby, scanner.nextInt()).forEach(System.out::println);
+                    NarzedziaWyszukiwania.znajdzPracownikowPoPensjiRownej(Listy.osoby, scanner.nextInt()).forEach(System.out::println);
                 }
-                case 17 ->{
+                case 17 -> {
                     System.out.println("Wprowadz pensję:");
-                    NarzedziaWyszukiwania.znajdzPracownikowPoPensjiWiekszejNiz(uczelnia.osoby, scanner.nextInt()).forEach(System.out::println);
+                    NarzedziaWyszukiwania.znajdzPracownikowPoPensjiWiekszejNiz(Listy.osoby, scanner.nextInt()).forEach(System.out::println);
                 }
                 //STANOWISKO
-                case 18 ->{
+                case 18 -> {
                     scanner.nextLine();
                     System.out.println("Wprowadz stanowisko:");
-                    NarzedziaWyszukiwania.znajdzPracownikowPoStanowisku(uczelnia.osoby, scanner.nextLine()).forEach(System.out::println);
+                    NarzedziaWyszukiwania.znajdzPracownikowPoStanowisku(Listy.osoby, scanner.nextLine()).forEach(System.out::println);
                 }
                 //STUDENCI
-                case 19 ->{
+                case 19 -> {
                     scanner.nextLine();
                     System.out.println("Wprowadz numer indeksu:");
-                    Student student = NarzedziaWyszukiwania.znajdzStudentaPoIndeksie(uczelnia.osoby, scanner.nextLine());
-                    if(student!=null){
+                    Student student = NarzedziaWyszukiwania.znajdzStudentaPoIndeksie(Listy.osoby, scanner.nextLine());
+                    if (student != null) {
                         System.out.println(student);
-                    }else{
+                    } else {
                         System.out.println("\nNIE ZNALEZIONO STUDENTA\n");
                     }
                 }
-                case 20 ->{
+                case 20 -> {
                     System.out.println("Wprowadz numer roku:");
-                    NarzedziaWyszukiwania.znajdzStudentowPoRokuStudiow(uczelnia.osoby, scanner.nextInt()).forEach(System.out::println);
+                    NarzedziaWyszukiwania.znajdzStudentowPoRokuStudiow(Listy.osoby, scanner.nextInt()).forEach(System.out::println);
                 }
-                case 21 ->{
+                case 21 -> {
                     scanner.nextLine();
                     System.out.println("Wprowadz nazwę kierunku:");
-                    NarzedziaWyszukiwania.znajdzStudentowPoKierunku(uczelnia.osoby, scanner.nextLine()).forEach(System.out::println);
+                    NarzedziaWyszukiwania.znajdzStudentowPoKierunku(Listy.osoby, scanner.nextLine()).forEach(System.out::println);
                 }
                 //KURS
-                case 22 ->{
+                case 22 -> {
                     scanner.nextLine();
                     System.out.println("Wprowadz nazwę:");
-                    Kurs kurs = NarzedziaWyszukiwania.znajdzKursPoNazwie(uczelnia.kursy, scanner.nextLine());
-                    if (kurs != null){
+                    Kurs kurs = NarzedziaWyszukiwania.znajdzKursPoNazwie(Listy.kursy, scanner.nextLine());
+                    if (kurs != null) {
                         System.out.println(kurs);
-                    }else {
+                    } else {
                         System.out.println("\nNIE ZNALEZIONO KURSU\n");
                     }
                 }
-                case 23 ->{
-                    int wybor =-1;
+                case 23 -> {
+                    int wybor = -1;
                     AtomicInteger counter = new AtomicInteger(0);
-                    uczelnia.osoby.stream()
+                    Listy.osoby.stream()
                             .filter(osoba -> osoba instanceof Pracownik_Badawczo_Dydaktyczny)
-                            .forEach(osoba -> System.out.println("["+counter.incrementAndGet()+"] - "+osoba.getImie()+" "+ osoba.getNazwisko()));
+                            .forEach(osoba -> System.out.println("[" + counter.incrementAndGet() + "] - " + osoba.getImie() + " " + osoba.getNazwisko()));
 
                     do {
                         System.out.println("WYBIERZ PROWADZĄCEGO:");
@@ -520,19 +365,19 @@ public class Uczelnia {
                     } while (wybor < 1 || wybor > counter.get());
 
                     int c = 0;
-                    for (Osoba osoba : uczelnia.osoby) {
+                    for (Osoba osoba : Listy.osoby) {
                         if (osoba instanceof Pracownik_Badawczo_Dydaktyczny) {
                             c++;
                             if (c == wybor) {
-                                NarzedziaWyszukiwania.znajdzKursyPoProwadzacym(uczelnia.kursy, (Pracownik_Badawczo_Dydaktyczny) osoba).forEach(System.out::println);
+                                NarzedziaWyszukiwania.znajdzKursyPoProwadzacym(Listy.kursy, (Pracownik_Badawczo_Dydaktyczny) osoba).forEach(System.out::println);
                             }
                         }
                     }
 
                 }
-                case 24 ->{
+                case 24 -> {
                     System.out.println("Wprowadz liczbę punktów ECTS:");
-                    NarzedziaWyszukiwania.znajdzKursyPoECTS(uczelnia.kursy, scanner.nextInt()).forEach(System.out::println);
+                    NarzedziaWyszukiwania.znajdzKursyPoECTS(Listy.kursy, scanner.nextInt()).forEach(System.out::println);
                 }
 
             }
@@ -540,9 +385,9 @@ public class Uczelnia {
         }
     }
 
-    public void serialTool(Uczelnia uczelnia){
+    public void serialTool(Uczelnia uczelnia) {
         Scanner scanner = new Scanner(System.in);
-        while(true){
+        while (true) {
 
             System.out.println("\nWYBIERZ OPCJE SERIALIZACJI:");
             System.out.println("[0] - WYJDŹ Z OPCJI SERIALIZACJI");
@@ -552,27 +397,27 @@ public class Uczelnia {
             System.out.println("[4] - wczytaj kursy");
             System.out.println();
 
-            switch(scanner.nextInt()){
-                case 0 ->{
+            switch (scanner.nextInt()) {
+                case 0 -> {
                     return;
                 }
-                case 1 ->{
-                    SerializacjaOsob.serializacja(uczelnia.osoby, "Osoby.ser");
+                case 1 -> {
+                    SerializacjaOsob.serializacja(Listy.osoby, "Osoby.ser");
                 }
-                case 2 ->{
-                    if(SerializacjaOsob.deserializacja(uczelnia.osoby,"Osoby.ser")!=null){
-                        uczelnia.osoby = SerializacjaOsob.deserializacja(uczelnia.osoby,"Osoby.ser");
-                    }else{
+                case 2 -> {
+                    if (SerializacjaOsob.deserializacja(Listy.osoby, "Osoby.ser") != null) {
+                        Listy.osoby = SerializacjaOsob.deserializacja(Listy.osoby, "Osoby.ser");
+                    } else {
                         System.out.println("Wystąpił problem w czasie odczytu osób");
                     }
                 }
-                case 3 ->{
-                    SerializacjaOsob.serializacja(uczelnia.kursy, "Kursy.ser");
+                case 3 -> {
+                    SerializacjaOsob.serializacja(Listy.kursy, "Kursy.ser");
                 }
-                case 4 ->{
-                    if(SerializacjaOsob.deserializacja(uczelnia.kursy,"Kursy.ser")!=null){
-                        uczelnia.kursy = SerializacjaOsob.deserializacja(uczelnia.kursy,"Kursy.ser");
-                    }else{
+                case 4 -> {
+                    if (SerializacjaOsob.deserializacja(Listy.kursy, "Kursy.ser") != null) {
+                        Listy.kursy = SerializacjaOsob.deserializacja(Listy.kursy, "Kursy.ser");
+                    } else {
                         System.out.println("Wystąpił problem w czasie odczytu kursów");
                     }
                 }
@@ -582,7 +427,7 @@ public class Uczelnia {
 
     public void sortTool(Uczelnia uczelnia) throws InterruptedException {
         Scanner scanner = new Scanner(System.in);
-        while(true){
+        while (true) {
 
             System.out.println("\nWYBIERZ OPCJE SORTOWANIA:");
             System.out.println("[0] - WYJDŹ Z OPCJI SORTOWANIA");
@@ -592,52 +437,56 @@ public class Uczelnia {
             System.out.println("[4] - sortuj osoby po wieku");
             System.out.println("[5] - sortuj pracowników po zarobkach");
             System.out.println("[6] - sortuj pracowników po stażu pracy");
-            System.out.println("[7] - sortuj po nazwach kursów dla wybranego studenta po indeksie\n");
+            System.out.println("[7] - sortuj po nazwach kursów dla wybranego studenta po indeksie");
+            System.out.println("[8] - sortuj osoby po nazwisku i wieku\n");
 
-            switch(scanner.nextInt()){
-                case 0 ->{
+            switch (scanner.nextInt()) {
+                case 0 -> {
                     return;
                 }
-                case 1 ->{
-                    Collections.sort(uczelnia.osoby, uczelnia.getComparatorImie());
-                    sortToolConfirmSortAndDisplayOsoby(uczelnia.osoby);
+                case 1 -> {
+                    Listy.osoby.sort(NarzedziaSortowania.getComparatorImie());
+                    sortToolConfirmSortAndDisplayOsoby(Listy.osoby);
                 }
-                case 2 ->{
-                    Collections.sort(uczelnia.osoby, uczelnia.getComparatorNazwisko());
-                    sortToolConfirmSortAndDisplayOsoby(uczelnia.osoby);
+                case 2 -> {
+                    Listy.osoby.sort(NarzedziaSortowania.getComparatorNazwisko());
+                    sortToolConfirmSortAndDisplayOsoby(Listy.osoby);
                 }
-                case 3 ->{
-                    Collections.sort(uczelnia.osoby, uczelnia.getComparatorNazwiskoImie());
-                    sortToolConfirmSortAndDisplayOsoby(uczelnia.osoby);
+                case 3 -> {
+                    Listy.osoby.sort(NarzedziaSortowania.getComparatorNazwiskoImie());
+                    sortToolConfirmSortAndDisplayOsoby(Listy.osoby);
                 }
-                case 4 ->{
-                    Collections.sort(uczelnia.osoby, uczelnia.getComparatorWiek());
-                    sortToolConfirmSortAndDisplayOsoby(uczelnia.osoby);
+                case 4 -> {
+                    Listy.osoby.sort(NarzedziaSortowania.getComparatorWiek());
+                    sortToolConfirmSortAndDisplayOsoby(Listy.osoby);
                 }
-                case 5 ->{
-                    ArrayList<Pracownik_Uczelni> pracownicy = generateWorkersArray(uczelnia.osoby);
-                    pracownicy.sort(ComparatorPensja);
+                case 5 -> {
+                    ArrayList<Pracownik_Uczelni> pracownicy = generateWorkersArray(Listy.osoby);
+                    pracownicy.sort(NarzedziaSortowania.getComparatorPensja());
                     pracownicy.forEach(System.out::println);
                 }
-                case 6 ->{
-                    ArrayList<Pracownik_Uczelni> pracownicy = generateWorkersArray(uczelnia.osoby);
-                    pracownicy.sort(ComparatorStaz);
+                case 6 -> {
+                    ArrayList<Pracownik_Uczelni> pracownicy = generateWorkersArray(Listy.osoby);
+                    pracownicy.sort(NarzedziaSortowania.getComparatorStaz());
                     pracownicy.forEach(System.out::println);
                 }
-                case 7 ->{
+                case 7 -> {
                     scanner.nextLine();
                     System.out.println("Wprowadź indeks studenta:");
                     String index = scanner.nextLine();
-                    Student student = NarzedziaWyszukiwania.znajdzStudentaPoIndeksie(uczelnia.osoby, index);
-                    if(student==null){
+                    Student student = NarzedziaWyszukiwania.znajdzStudentaPoIndeksie(Listy.osoby, index);
+                    if (student == null) {
                         System.out.println("NIE ZNALEZIONO STUDENTA");
-                    }else{
-                        student.getListaKursow().sort(ComparatorKursy);
+                    } else {
+                        student.getListaKursow().sort(NarzedziaSortowania.getComparatorKursy());
                         System.out.println(student);
                     }
                 }
+                case 8 -> {
+                    Listy.osoby.sort(NarzedziaSortowania.getComparatorNazwiskoWiek());
+                    sortToolConfirmSortAndDisplayOsoby(Listy.osoby);
+                }
             }
-
 
 
         }
@@ -646,12 +495,13 @@ public class Uczelnia {
     private void sortToolConfirmSortAndDisplayOsoby(ArrayList<Osoba> lista) throws InterruptedException {
         System.out.println("KOLECKCJA ZOSTALA POSORTOWANA\n");
         System.out.println("WYGLĄD FRAGMENTU KOLEKCJI PO SORTOWANIU:\n");
-        if(lista.size()<5){
+        if (lista.size() < 5) {
             lista.forEach(System.out::println);
-        }else{
-            int counter = 0;{
-                while (counter!=5){
-                    System.out.println(lista.get(counter).getImie()+" "+lista.get(counter).getNazwisko()+" "+lista.get(counter).getWiek());
+        } else {
+            int counter = 0;
+            {
+                while (counter != 5) {
+                    System.out.println(lista.get(counter).getImie() + " " + lista.get(counter).getNazwisko() + " " + lista.get(counter).getWiek());
                     counter++;
                 }
             }
@@ -659,10 +509,11 @@ public class Uczelnia {
         Thread.sleep(500);
         System.out.println("\n");
     }
-    private ArrayList<Pracownik_Uczelni> generateWorkersArray(ArrayList<Osoba> lista){
+
+    private ArrayList<Pracownik_Uczelni> generateWorkersArray(ArrayList<Osoba> lista) {
         ArrayList<Pracownik_Uczelni> pracownicy = new ArrayList<Pracownik_Uczelni>();
-        for (Osoba osoba: lista) {
-            if(osoba instanceof Pracownik_Uczelni){
+        for (Osoba osoba : lista) {
+            if (osoba instanceof Pracownik_Uczelni) {
                 pracownicy.add((Pracownik_Uczelni) osoba);
             }
         }
@@ -670,133 +521,15 @@ public class Uczelnia {
     }
 
 
-    //COMPARATORS SECTION===========================================================
-    private OsobaCompareImie ComparatorImie;
-    private OsobaCompareNazwisko ComparatorNazwisko;
-    private OsobaCompareNazwiskoImie ComparatorNazwiskoImie;
-    private OsobaCompareWiek ComparatorWiek;
-    private PracownikComparePensja ComparatorPensja;
-    private PracownikCompareStaz ComparatorStaz;
-    private StudentCompareKursy ComparatorKursy;
-
-    public StudentCompareKursy getComparatorKursy() {
-        return ComparatorKursy;
-    }
-
-    public void setComparatorKursy(StudentCompareKursy comparatorKursy) {
-        ComparatorKursy = comparatorKursy;
-    }
-
-    public OsobaCompareImie getComparatorImie() {
-        return ComparatorImie;
-    }
-
-    public void setComparatorImie(OsobaCompareImie comparatorImie) {
-        ComparatorImie = comparatorImie;
-    }
-
-    public OsobaCompareNazwisko getComparatorNazwisko() {
-        return ComparatorNazwisko;
-    }
-
-    public void setComparatorNazwisko(OsobaCompareNazwisko comparatorNazwisko) {
-        ComparatorNazwisko = comparatorNazwisko;
-    }
-
-    public OsobaCompareNazwiskoImie getComparatorNazwiskoImie() {
-        return ComparatorNazwiskoImie;
-    }
-
-    public void setComparatorNazwiskoImie(OsobaCompareNazwiskoImie comparatorNazwiskoImie) {
-        ComparatorNazwiskoImie = comparatorNazwiskoImie;
-    }
-
-    public OsobaCompareWiek getComparatorWiek() {
-        return ComparatorWiek;
-    }
-
-    public void setComparatorWiek(OsobaCompareWiek comparatorWiek) {
-        ComparatorWiek = comparatorWiek;
-    }
-
-    public PracownikComparePensja getComparatorPensja() {
-        return ComparatorPensja;
-    }
-
-    public void setComparatorPensja(PracownikComparePensja comparatorPensja) {
-        ComparatorPensja = comparatorPensja;
-    }
-
-    public PracownikCompareStaz getComparatorStaz() {
-        return ComparatorStaz;
-    }
-
-    public void setComparatorStaz(PracownikCompareStaz comparatorStaz) {
-        ComparatorStaz = comparatorStaz;
-    }
-
-    private void createComparators(){
-        ComparatorImie= new OsobaCompareImie();
-        ComparatorNazwisko = new OsobaCompareNazwisko();
-        ComparatorNazwiskoImie = new OsobaCompareNazwiskoImie();
-        ComparatorWiek = new OsobaCompareWiek();
-        ComparatorPensja= new PracownikComparePensja();
-        ComparatorStaz = new PracownikCompareStaz();
-        ComparatorKursy = new StudentCompareKursy();
-    }
-
-    class OsobaCompareImie implements Comparator<Osoba>{
-        @Override
-        public int compare(Osoba o1, Osoba o2) {
-            return o1.getImie().compareTo(o2.getImie());
-        }
-    }
-    class OsobaCompareNazwisko implements Comparator<Osoba>{
-        @Override
-        public int compare(Osoba o1, Osoba o2) {
-            return o1.getNazwisko().compareTo(o2.getNazwisko());
-        }
-    }
-    class OsobaCompareNazwiskoImie implements Comparator<Osoba>{
-        @Override
-        public int compare(Osoba o1, Osoba o2) {
-            String p1 = o1.getNazwisko()+" "+o1.getImie();
-            String p2 = o2.getNazwisko()+" "+o2.getImie();
-            return p1.compareTo(p2);
-        }
-    }
-    class OsobaCompareWiek implements Comparator<Osoba>{
-        @Override
-        public int compare(Osoba o1, Osoba o2) {
-            return Integer.compare(o1.getWiek(), o2.getWiek());
-        }
-    }
-    class PracownikComparePensja implements Comparator<Pracownik_Uczelni>{
-        @Override
-        public int compare(Pracownik_Uczelni o1, Pracownik_Uczelni o2) {
-            return Double.compare(o1.getPensja(), o2.getPensja());
-        }
-    }
-    class PracownikCompareStaz implements Comparator<Pracownik_Uczelni>{
-        @Override
-        public int compare(Pracownik_Uczelni o1, Pracownik_Uczelni o2) {
-            return Integer.compare(o1.getStazPracy(), o2.getStazPracy());
-        }
-    }
-    class StudentCompareKursy implements Comparator<Kurs>{
-        @Override
-        public int compare(Kurs o1, Kurs o2) {
-            return o1.getNazwaKursu().compareTo(o2.getNazwaKursu());
-        }
-    }
 
 
 
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         Uczelnia uczelnia = new Uczelnia();
         try {
             startInteraction(uczelnia);
-        }catch (InterruptedException ie){
+        } catch (InterruptedException ie) {
             ie.printStackTrace();
         }
 

@@ -2,6 +2,7 @@ package Klasy;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Kurs implements Serializable {
 
@@ -44,6 +45,7 @@ public class Kurs implements Serializable {
     public void setEcts(int ects) {
         this.ects = ects;
     }
+
 
     @Override
     public String toString() {

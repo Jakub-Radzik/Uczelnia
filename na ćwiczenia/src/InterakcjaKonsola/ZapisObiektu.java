@@ -1,5 +1,5 @@
 package InterakcjaKonsola;
 
-public interface ZapisObiektu {
+public interface ZapisObiektu{
     Object saveObject();
 }
