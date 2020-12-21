@@ -21,9 +21,6 @@ public abstract class Osoba implements Serializable{
         this.plec = plec;
     }
 
-    public Osoba() {
-    }
-
     public String getImie() {
         return imie;
     }

@@ -18,10 +18,6 @@ public class Kurs implements Serializable {
         this.ects = ects;
     }
 
-    public Kurs() {
-
-    }
-
     public String getNazwaKursu() {
         return nazwaKursu;
     }
